@@ -12,10 +12,16 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "lint-staged": "lint-staged",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "*.(html|css|js|jsx|json)": "prettier --write",
+    "*.(js|jsx)": "eslint"
   },
   "eslintConfig": {
     "extends": [
@@ -37,7 +43,7 @@
   },
   "devDependencies": {
     "eslint": "^8.25.0",
-    "husky": "^8.0.1",
+    "husky": "^8.0.0",
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1"
   }
