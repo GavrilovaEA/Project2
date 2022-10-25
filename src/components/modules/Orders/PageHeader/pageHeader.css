@@ -1,0 +1,54 @@
+/* Светлая тема */
+.page-header {
+    --page-header-bg-color: transparent;
+    --page-header__title-text-color: #000000;
+}
+
+/* Темная тема */
+:root[theme="dark"] .page-header {
+    --page-header-bg-color: transparent;
+    --page-header__title-text-color: #bcc4cc;
+}
+
+.page-header {
+    background-color: var(--page-header-bg-color);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.page-header__title {
+    font-family: "Ubuntu";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.625rem;
+    line-height: 2rem;
+    letter-spacing: -0.0125rem;
+    color: var(--page-header__title-text-color);
+}
+
+.page-header Button {
+    --button_reverse__ico-opacity: 1;
+}
+
+.page-header__button__text-light,
+:root[theme="dark"] .page-header__button__text-dark,
+.page-header__button__ico-light,
+:root[theme="dark"] .page-header__button__ico-dark {
+    display: block;
+}
+
+:root[theme="dark"] .page-header__button__text-light,
+.page-header__button__text-dark,
+:root[theme="dark"] .page-header__button__ico-light,
+.page-header__button__ico-dark {
+    display: none;
+}
+
+.page-header__fTheme {
+    position: absolute;
+    width: 10rem;
+    left: 0;
+    top: 0;
+    display: none;
+}
