@@ -1,86 +1,112 @@
 import { FilterStr } from "./FilterStr/FilterStr";
 import { FilterForm } from "./FilterForm/FilterForm";
-import "./filterBar.css";
 import { loadStatus } from "../../../../dbase/data";
 import { useState } from "react";
+import styles from "./FilterBar.module.css";
 
-export const FilterBar = (props) => {
-    // Загрузка списка статусов
-    let statusData = loadStatus();
-    for (let i = 0; i < statusData.length; i++) {
-        statusData[i]["checked"] = false;
-    }
+export const FilterBar = ({ onApplyFilter }) => {
+  // Состояния
+  const [isShowForm, setShowForm] = useState(false);
+  const [find, setFind] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [startSumma, setStartSumma] = useState("");
+  const [endSumma, setEndSumma] = useState("");
+  const [statusSelected, setStatusSelected] = useState([]);
 
-    // Состояния
-    const [find, setFind] = useState("");
-    const [startDate, setStartDate] = useState("");
-    const [endDate, setEndDate] = useState("");
-    const [startSumma, setStartSumma] = useState("");
-    const [endSumma, setEndSumma] = useState("");
-    const [statusList, setStatusList] = useState(statusData);
+  // Демонстрация работы индикатора
+  let loading = isShowForm;
 
-    // Клик на элементе выпадающего списка
-    const onSelectStatusList = (id) => {
-        let newStatusList = statusList;
-        for (let i = 0; i < newStatusList.length; i++) {
-            if (newStatusList[i].id === id) {
-                newStatusList[i].checked = !newStatusList[i].checked;
-                break;
-            }
-        }
-        setStatusList(newStatusList);
-    };
-
-    // Возврат значений фильтра
-    const onClickBtApply = () => {
-        const result = {
-            startDate: startDate,
-            endDate: endDate,
-            startSumma: startSumma,
-            endSumma: endSumma,
-            statusList: statusList,
-        };
-        console.log(result);
-        if (props.onApplyFilter) {
-            props.onApplyFilter(result);
-        }
-    };
-
-    const onResetFilter = () => {
-        setStartDate("");
-        setEndDate("");
-        let newStatusList = statusList;
-        for (let i = 0; i < newStatusList.length; i++) {
-            newStatusList[i].checked = false;
-        }
-        setStatusList(newStatusList);
-        setStartSumma("");
-        setEndSumma("");
-    };
-
-    return (
-        <div className="filter-bar filter-bar_show-form" id="filter">
-            <FilterStr
-                showForm={props.showForm}
-                onChangeFind={(value) => setFind(value)}
-                onClickBtFilter={props.onClickBtFilter}
-                onResetFilter={onResetFilter}
-                find={find}
-            />
-            <FilterForm
-                startDate={startDate}
-                endDate={endDate}
-                statusList={statusList}
-                startSumma={startSumma}
-                endSumma={endSumma}
-                showForm={props.showForm}
-                onClickBtApply={onClickBtApply}
-                onSelectStatusList={onSelectStatusList}
-                onChangeStartDate={(value) => setStartDate(value)}
-                onChangeEndDate={(value) => setEndDate(value)}
-                onChangeStartSumma={(value) => setStartSumma(value)}
-                onChangeEndSumma={(value) => setEndSumma(value)}
-            />
-        </div>
+  // Клик на элементе выпадающего списка
+  const onSelectStatusList = (id) => {
+    setStatusSelected(
+      statusSelected.includes(id)
+        ? statusSelected.filter((item) => item !== id)
+        : [...statusSelected, id]
     );
+  };
+
+  // Валидация даты
+  const validateDate = (value) => {
+    if (value === "") return true;
+    let result = true;
+    let aTmp = value.split(".");
+    if (aTmp.length !== 3) {
+      result = false;
+    }
+    if (new Date(aTmp[2] + "-" + aTmp[1] + "-" + aTmp[0]) == "Invalid Date") {
+      result = false;
+    }
+    return result;
+  };
+
+  // Валидация целого числа
+  const validateInt = (value) => {
+    if (value === "") return true;
+    let result = !isNaN(Number(value));
+    if (value.indexOf(".") !== -1) result = false;
+    return result;
+  };
+
+  // Возврат значений фильтра
+  const onClickApply = () => {
+    if (
+      validateDate(startDate) &&
+      validateDate(endDate) &&
+      validateInt(startSumma) &&
+      validateInt(endSumma)
+    ) {
+      const result = {
+        startDate: startDate,
+        endDate: endDate,
+        startSumma: startSumma,
+        endSumma: endSumma,
+        statusSelected: statusSelected,
+      };
+      onApplyFilter && onApplyFilter(result);
+    } else {
+      console.log("Ошибка валидации");
+    }
+  };
+
+  // Сброс фильтров
+  const onResetFilter = () => {
+    setStartDate("");
+    setEndDate("");
+    setStatusSelected([]);
+    setStartSumma("");
+    setEndSumma("");
+  };
+
+  return (
+    <div className={styles._} id="filter">
+      <FilterStr
+        showForm={isShowForm}
+        onChangeFind={(value) => setFind(value)}
+        onClickButtonFilter={() => setShowForm(!isShowForm)}
+        onResetFilter={onResetFilter}
+        find={find}
+        loading={loading}
+      />
+      {isShowForm && (
+        <FilterForm
+          startDate={startDate}
+          validStartDate={validateDate(startDate)}
+          endDate={endDate}
+          validEndDate={validateDate(endDate)}
+          statusSelected={statusSelected}
+          startSumma={startSumma}
+          validStartSumma={validateInt(startSumma)}
+          endSumma={endSumma}
+          validEndSumma={validateInt(endSumma)}
+          onClickApply={onClickApply}
+          onSelectStatusList={onSelectStatusList}
+          onChangeStartDate={(value) => setStartDate(value)}
+          onChangeEndDate={(value) => setEndDate(value)}
+          onChangeStartSumma={(value) => setStartSumma(value)}
+          onChangeEndSumma={(value) => setEndSumma(value)}
+        />
+      )}
+    </div>
+  );
 };

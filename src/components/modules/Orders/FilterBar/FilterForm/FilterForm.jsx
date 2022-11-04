@@ -1,111 +1,113 @@
 import { Input } from "../../../../shared/Input/Input";
 import { Button } from "../../../../shared/Button/Button";
-import { useState } from "react";
 import { Dropdown } from "../../../../shared/Dropdown/Dropdown";
+import { Checkbox } from "../../../../shared/Checkbox/Checkbox";
+import { STATUS_LIST } from "../../../../../dbase/data";
+import styles from "./FilterForm.module.css";
 
-export const FilterForm = (props) => {
-    // Состояния
-    const [showStatusList, setShowStatusList] = useState({
-        isShow: false,
-        top: 0,
-        left: 0,
-    });
+export const FilterForm = ({
+  statusSelected,
+  onSelectStatusList,
+  startDate,
+  validStartDate,
+  onChangeStartDate,
+  endDate,
+  validEndDate,
+  onChangeEndDate,
+  startSumma,
+  validStartSumma,
+  onChangeStartSumma,
+  endSumma,
+  validEndSumma,
+  onChangeEndSumma,
+  onClickApply,
+}) => {
+  // Строка статусов для Input
+  let statusText = "Любой";
+  if (
+    statusSelected.length !== 0 &&
+    statusSelected.length !== STATUS_LIST.size
+  ) {
+    statusText = Object.keys(STATUS_LIST)
+      .filter((item) => statusSelected.includes(item))
+      .map((item) => STATUS_LIST[item])
+      .join(", ");
+  }
 
-    // Показ/скрытие выпадающего списка
-    const onShowHideStatusList = (e) => {
-        let newShowStatusList = { isShow: false, top: 0, left: 0 };
-        if (!showStatusList.isShow) {
-            let el = e.currentTarget.parentElement;
-            let coords = el.getBoundingClientRect();
-            newShowStatusList.top = coords.bottom + window.pageYOffset;
-            newShowStatusList.left = coords.left + window.pageXOffset;
-            newShowStatusList.isShow = true;
-        }
-        setShowStatusList(newShowStatusList);
-    };
+  // Содержимое раскрывающегося списка
+  const dlgStatus = Object.keys(STATUS_LIST).map((item) => (
+    <Checkbox
+      className={styles.dropdown_checkbox}
+      text={STATUS_LIST[item]}
+      checked={statusSelected.includes(item)}
+      onChange={() => onSelectStatusList(item)}
+    />
+  ));
 
-    // Выпадающий список
-    const dlgEdStatus = showStatusList.isShow ? (
-        <Dropdown
-            type={"ChkList"}
-            data={props.statusList}
-            top={showStatusList.top}
-            left={showStatusList.left}
-            onSelect={props.onSelectStatusList}
+  return [
+    <div className={styles._}>
+      <div className={styles.period}>
+        <Input
+          className={styles.period__start}
+          label={"Дата оформления"}
+          maskText={"с"}
+          value={startDate}
+          incorrect={!validStartDate}
+          placeholder={"dd.mm.yyyy"}
+          onChange={(e) => onChangeStartDate(e.target.value)}
+          onClickButton={() => onChangeStartDate("")}
         />
-    ) : null;
-
-    // Строка статусов для Input
-    const selectStatus = props.statusList.filter((item) => item.checked);
-    let statusText = "Любой";
-    if (
-        selectStatus.length !== 0 &&
-        selectStatus.length !== props.statusList.length
-    ) {
-        statusText = selectStatus.map((item) => item.name).join(", ");
-    }
-
-    let result = null;
-    if (props.showForm) {
-        result = [
-            <div className="filter-bar__form">
-                <div className="filter-bar__form__period">
-                    <Input
-                        className={"filter-bar__form__period__start"}
-                        label={"Дата оформления"}
-                        maskText={"с"}
-                        value={props.startDate}
-                        placeholder={"Введите..."}
-                        validateType={"date"}
-                        onChange={props.onChangeStartDate}
-                    />
-                    <Input
-                        className={"filter-bar__form__period__end"}
-                        label="&nbsp;"
-                        maskText={"по"}
-                        value={props.endDate}
-                        placeholder={"Введите..."}
-                        validateType={"date"}
-                        onChange={props.onChangeEndDate}
-                    />
-                </div>
-                <Input
-                    className={"filter-bar__form__status"}
-                    combobox
-                    label={"Статус заказа"}
-                    value={statusText}
-                    placeholder={"Введите..."}
-                    onClick={onShowHideStatusList}
-                />
-                <div key={"fbfs"} className="filter-bar__form__summa">
-                    <Input
-                        className={"filter-bar__form__summa__start"}
-                        label={"Сумма заказа"}
-                        maskText={"от"}
-                        value={props.startSumma}
-                        placeholder={"Введите.."}
-                        validateType={"int"}
-                        onChange={props.onChangeStartSumma}
-                    />
-                    <Input
-                        className={"filter-bar__form__summa__end"}
-                        label="&nbsp;"
-                        maskText={"до"}
-                        value={props.endSumma}
-                        placeholder={"Введите..."}
-                        validateType={"int"}
-                        onChange={props.onChangeEndSumma}
-                    />
-                </div>
-                <Button
-                    className={"filter-bar__form__apply"}
-                    reverse
-                    text={"Применить"}
-                    onClick={props.onClickBtApply}
-                />
-            </div>,
-            dlgEdStatus,
-        ];
-    }
-    return result;
+        <Input
+          className={styles.period__end}
+          label="&nbsp;"
+          maskText={"по"}
+          value={endDate}
+          incorrect={!validEndDate}
+          placeholder={"dd.mm.yyyy"}
+          onChange={(e) => onChangeEndDate(e.target.value)}
+          onClickButton={() => onChangeEndDate("")}
+        />
+      </div>
+      <Dropdown
+        trigger={
+          <div>
+            <Input
+              className={styles.status}
+              combobox
+              label={"Статус заказа"}
+              value={statusText}
+              placeholder={"Введите..."}
+            />
+          </div>
+        }
+        overlay={dlgStatus}
+        className={styles.dropdown_list}
+      />
+      <div className={styles.summa}>
+        <Input
+          className={styles.summa__start}
+          label={"Сумма заказа"}
+          maskText={"от"}
+          value={startSumma}
+          incorrect={!validStartSumma}
+          placeholder={"₽"}
+          onChange={(e) => onChangeStartSumma(e.target.value)}
+          onClickButton={() => onChangeStartSumma("")}
+        />
+        <Input
+          className={styles.summa__end}
+          label="&nbsp;"
+          maskText={"до"}
+          value={endSumma}
+          incorrect={!validEndSumma}
+          placeholder={"₽"}
+          onChange={(e) => onChangeEndSumma(e.target.value)}
+          onClickButton={() => onChangeEndSumma("")}
+        />
+      </div>
+      <Button className={styles.apply} reverse onClick={onClickApply}>
+        Применить
+      </Button>
+    </div>,
+  ];
 };

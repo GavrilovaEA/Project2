@@ -1,36 +1,37 @@
-import "./dropdown.css";
-import { DropdownChkList } from "./DropdownChkList/DropdownChkList";
-import { DropdownRadio } from "./DropdownRadio/DropdownRadio";
-import { DropdownNumPage } from "./DropdownNumPage/DropdownNumPage";
-import { DropdownDelRecs } from "./DropdownDelRecs/DropdownDelRecs";
-import { DropdownTheme } from "./DropdownTheme/DropdownTheme";
+import React, { useRef, useEffect } from "react";
+import cn from "classnames";
+import styles from "./Dropdown.module.css";
+import { useState } from "react";
 
-export const Dropdown = (props) => {
-    let result = null;
-    let stylePosition = {
-        position: "absolute",
-        top: props.top,
-        left: props.left,
+export const Dropdown = ({ trigger, overlay, className }) => {
+  const [isShow, setShow] = useState(false);
+  const refDropdown = useRef();
+
+  // По нажатию вне Dropdown скрыть overlay
+  useEffect(() => {
+    const onClick = (e) => {
+      if (!refDropdown.current.contains(e.target)) {
+        setShow(false);
+      }
     };
-    switch (props.type) {
-        case "ChkList":
-            result = <DropdownChkList {...props} style={stylePosition} />;
-            break;
-        case "Radio":
-            result = <DropdownRadio {...props} style={stylePosition} />;
-            break;
-        case "NumPage":
-            result = <DropdownNumPage {...props} style={stylePosition} />;
-            break;
-        case "DelRecs":
-            result = <DropdownDelRecs {...props} style={stylePosition} />;
-            break;
-        case "Theme":
-            result = <DropdownTheme {...props} style={stylePosition} />;
-            break;
-        default:
-            result = null;
-            break;
-    }
-    return result;
+    document.addEventListener("mousedown", onClick);
+    return () => {
+      document.removeEventListener("mousedown", onClick);
+    };
+  }, []);
+
+  // Добавление управляющему элементу события onClick
+  const newTrigger = React.cloneElement(trigger, {
+    onClick: (e) => {
+      e.preventDefault();
+      setShow(!isShow);
+    },
+  });
+
+  return (
+    <div className={styles._} ref={refDropdown}>
+      {newTrigger}
+      {isShow && <div className={cn(styles.overlay, className)}>{overlay}</div>}
+    </div>
+  );
 };

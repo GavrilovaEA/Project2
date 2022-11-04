@@ -1,24 +1,19 @@
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap");
 
-/*body {*/
-/*  !*margin: 0;*!*/
-/*  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',*/
-/*    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',*/
-/*    sans-serif;*/
-/*  -webkit-font-smoothing: antialiased;*/
-/*  -moz-osx-font-smoothing: grayscale;*/
-/*}*/
+body {
+  margin: 0;
+}
 
 :root {
-    --bg-color: #ffffff;
+  --bg-color: #ffffff;
 }
 
 :root[theme="dark"] {
-    --bg-color: #2b2d33;
+  --bg-color: #2b2d33;
 }
 
 body {
-    background-color: var(--bg-color);
+  background-color: var(--bg-color);
 }
 
 /*body * {*/
@@ -26,35 +21,3 @@ body {
 /*  font-style: normal;*/
 /*  font-weight: 400;*/
 /*}*/
-
-.App {
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 2rem 3rem 0;
-    gap: 2rem;
-    min-width: 57rem;
-    max-width: 75rem;
-    height: 100%;
-}
-.page-header {
-    flex: none;
-    order: 0;
-    align-self: stretch;
-    flex-grow: 0;
-}
-
-.filter-bar {
-    flex: none;
-    order: 1;
-    align-self: stretch;
-    flex-grow: 0;
-}
-
-.table {
-    flex: none;
-    order: 2;
-    align-self: stretch;
-    flex-grow: 1;
-}

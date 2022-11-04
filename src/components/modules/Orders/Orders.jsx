@@ -1,16 +1,16 @@
 import { PageHeader } from "./PageHeader/PageHeader";
 import { FilterBar } from "./FilterBar/FilterBar";
-import { useState } from "react";
+import styles from "./Orders.module.css";
 
 export const Orders = () => {
-    let [isShowFilter, setShowFilter] = useState(false);
-    return (
-        <div className={"App"}>
-            <PageHeader themeIco={"sun"} themeText={"Светлая"} />
-            <FilterBar
-                showForm={isShowFilter}
-                onClickBtFilter={() => setShowFilter(!isShowFilter)}
-            />
-        </div>
-    );
+  const applyFilter = (filter) => {
+    console.log(filter);
+  };
+
+  return (
+    <div className={styles._}>
+      <PageHeader />
+      <FilterBar onApplyFilter={applyFilter} />
+    </div>
+  );
 };

@@ -1,49 +1,42 @@
 import { Input } from "../../../../shared/Input/Input";
 import { Button } from "../../../../shared/Button/Button";
+import styles from "./FilterStr.module.css";
+import { LoadIndicator } from "../../../../shared/LoadIndicator/LoadIndicator";
 
-export const FilterStr = (props) => {
-    let result = null;
-    let mixin = "";
-    if (!props.showForm) {
-        mixin = " button_reverse";
-    }
-    let renderForm = [];
-    renderForm.push(
+export const FilterStr = ({
+  find,
+  onChangeFind,
+  showForm,
+  onClickButtonFilter,
+  onResetFilter,
+  loading,
+}) => {
+  return (
+    <div className={styles._}>
+      <div className={styles.groupItem}>
         <Input
-            className={"filter-bar__str__group-item__input-find"}
-            icoName={"find"}
-            placeholder={"Номер заказа или ФИО"}
-            onChange={props.onChangeFind}
-            value={props.find}
+          className={styles.inputFind}
+          iconName={"find"}
+          placeholder={"Номер заказа или ФИО"}
+          onChange={(e) => onChangeFind(e.target.value)}
+          onClickButton={() => onChangeFind("")}
+          value={find}
         />
-    );
-    renderForm.push(
         <Button
-            className={"filter-bar__str__group-item__button-show" + mixin}
-            icoName={"filter"}
-            text={"Фильтры"}
-            onClick={props.onClickBtFilter}
-        />
-    );
-    if (props.showForm)
-        renderForm.push(
-            <Button
-                className={"filter-bar__str__group-item__button-reset"}
-                text={"Сбросить фильтры"}
-                reverse
-                onClick={props.onResetFilter}
-            />
-        );
-    result = (
-        <div className="filter-bar__str">
-            <div className="filter-bar__str__group-item">{renderForm}</div>
-            <Button
-                className={"filter-bar__str__button-load"}
-                icoName={"load"}
-                text={"Загрузка"}
-                reverse
-            />
-        </div>
-    );
-    return result;
+          className={styles.buttonShow}
+          iconName={"filter"}
+          reverse={!showForm}
+          onClick={onClickButtonFilter}
+        >
+          Фильтры
+        </Button>
+        {showForm && (
+          <Button reverse onClick={onResetFilter}>
+            Сбросить фильтры
+          </Button>
+        )}
+      </div>
+      <LoadIndicator loading={loading} />
+    </div>
+  );
 };

@@ -1,0 +1,46 @@
+._ {
+  background-color: var(--filter-bar_form_bg-color);
+  border-radius: 0.5rem;
+  /*margin-top: 1rem;*/
+  padding: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 1rem;
+  align-self: stretch;
+}
+
+.period,
+.summa {
+  display: flex;
+  flex-direction: row;
+  gap: 0.25rem;
+}
+
+.period__start,
+.period__end {
+  width: 8.875rem;
+}
+
+.status {
+  width: 12rem;
+  flex-shrink: 0;
+}
+
+.summa__start,
+.summa__end {
+  width: 7.875rem;
+}
+
+.apply {
+  align-self: flex-end;
+}
+
+.dropdown_list {
+  padding: 0.5rem 0;
+  gap: 0;
+}
+
+.dropdown_checkbox {
+  padding: 0.5rem 1rem;
+}

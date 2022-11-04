@@ -1,28 +1,33 @@
-import "./button.css";
-import { ButtonIco } from "./ButtonIco/ButtonIco";
-import { ButtonText } from "./ButtonText/ButtonText";
+import cn from "classnames";
+import { Icon } from "../Icon/Icon";
+import styles from "./Button.module.css";
 
-export const Button = (props) => {
-    let mixin = "";
-    if (props.small) {
-        mixin += " button_small";
-    }
-    if (props["black-reverse"]) {
-        mixin += " button_black-reverse";
-    } else if (props.reverse) {
-        mixin += " button_reverse";
-    }
-    if (props["width-all"]) {
-        mixin += " button_width-all";
-    }
+export const Button = ({
+  className,
+  small,
+  blackReverse,
+  reverse,
+  widthAll,
+  iconName,
+  iconClass,
+  onClick,
+  children,
+}) => {
+  const componentClass = cn(
+    styles._,
+    {
+      [styles.size_small]: small,
+      [styles.blackReverse]: blackReverse,
+      [styles.reverse]: reverse,
+      [styles.widthAll]: widthAll,
+    },
+    className
+  );
 
-    return (
-        <button
-            className={"button" + mixin + " " + props.className}
-            onClick={props.onClick}
-        >
-            <ButtonIco icoName={props.icoName} />
-            <ButtonText text={props.text} />
-        </button>
-    );
+  return (
+    <button className={componentClass} onClick={onClick}>
+      <Icon iconName={iconName} className={cn(styles.ico, iconClass)} />
+      {children && <span className={styles.text}>{children}</span>}
+    </button>
+  );
 };

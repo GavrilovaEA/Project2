@@ -1,0 +1,31 @@
+._ {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: var(--filter-bar_str_bg-color);
+  align-self: stretch;
+}
+
+.groupItem {
+  display: flex;
+  flex-direction: row;
+  justify-items: flex-end;
+  gap: 1rem;
+}
+
+.inputFind {
+  width: 20rem;
+}
+
+.inputFind .input__field {
+  margin-top: 0;
+}
+
+.buttonShow {
+  --button__ico-opacity: 1;
+  --button_reverse__ico-opacity: 1;
+}
+
+.buttonLoad {
+  --button_reverse__ico-opacity: 1;
+}
