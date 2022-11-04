@@ -1,0 +1,29 @@
+/* Светлая тема */
+._ {
+  --table__body__row_selected-bg-color: #ebf0f5;
+  --table__body__row-border-color: #ebf0f5;
+}
+
+/* Темная тема */
+:root[theme="dark"] ._ {
+  --table__body__row_selected-bg-color: #767983;
+  --table__body__row-border-color: #171b1f;
+}
+
+._ {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0;
+  padding-left: 0.5rem;
+  height: 2.5rem;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+  border-bottom: 0.0625rem solid var(--table__body__row-border-color);
+}
+
+.selected {
+  background-color: var(--table__body__row_selected-bg-color);
+}

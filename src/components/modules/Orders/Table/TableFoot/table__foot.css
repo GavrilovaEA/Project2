@@ -1,0 +1,85 @@
+/* Светлая тема */
+.table__foot {
+  --table__foot-bg-color: #ebf0f5;
+  --table__foot__action__rec-count-text-color: #459df5;
+}
+
+.table__foot__action__rec-del {
+  --button-bg-color: #f53152;
+  --button__ico-opacity: 1;
+  --button__ico-color: #ffffff;
+  --button__text-color: #ffffff;
+  --button-hover-bg-color: #c92f4d;
+}
+
+/* Темная тема */
+:root[theme="dark"] .table__foot {
+  --table__foot-bg-color: #171b1f;
+  --table__foot__action__rec-count-text-color: #459df5;
+}
+
+:root[theme="dark"] .table__foot__action__rec-del {
+  --button-bg-color: #f53152;
+  --button__ico-opacity: 1;
+  --button__ico-color: #ffffff;
+  --button__text-color: #ffffff;
+  --button-hover-bg-color: #c92f4d;
+}
+
+.table__foot {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  height: 2.5rem;
+  background: var(--table__foot-bg-color);
+}
+
+.table__foot__action {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0;
+  gap: 1rem;
+  height: 1.5rem;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.table__foot__action__rec-count {
+  color: var(--table__foot__action__rec-count-text-color);
+}
+
+.table__foot__action__rec-del .button__ico {
+  fill: none;
+  stroke: var(--button__ico-color);
+}
+
+/*.table__foot__fSetStatus {*/
+/*    position: absolute;*/
+/*    width: 10rem;*/
+/*    left: 0;*/
+/*    top: 0;*/
+/*    display: none;*/
+
+/*}*/
+
+/*.table__foot__fGotoPage {*/
+/*    position: absolute;*/
+/*    width: 10rem;*/
+/*    left: 0;*/
+/*    top: 0;*/
+/*    display: none;*/
+/*}*/
+
+/*.table__foot__fDelRecs {*/
+/*    position: absolute;*/
+/*    width: 10rem;*/
+/*    left: 0;*/
+/*    top: 0;*/
+/*    display: none;*/
+
+/*}*/

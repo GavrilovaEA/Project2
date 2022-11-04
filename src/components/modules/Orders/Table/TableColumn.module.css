@@ -1,0 +1,27 @@
+._:nth-child(1) {
+  flex: 0 0 1rem;
+}
+
+._:nth-child(2) {
+  flex: 0 0 4rem;
+}
+
+._:nth-child(3) {
+  flex: 0 0 7rem;
+}
+
+._:nth-child(4) {
+  flex: 1 1 8rem;
+}
+
+._:nth-child(5) {
+  flex: 1 1 5rem;
+}
+
+._:nth-child(6) {
+  flex: 1 1 8rem;
+}
+
+._:nth-child(7) {
+  flex: 1 1 16rem;
+}
