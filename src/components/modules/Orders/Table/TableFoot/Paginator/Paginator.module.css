@@ -1,0 +1,78 @@
+/* Светлая тема */
+._ {
+  --paginator-bg-color: transparent;
+
+  --paginator__page-bg-color: transparent;
+  --paginator__page-text-color: #459df5;
+  --paginator__page-border-color: transparent;
+
+  --paginator-active__page-bg-color: #459df5;
+  --paginator-active__page-text-color: #ffffff;
+  --paginator-active__page-border-color: transparent;
+
+  --paginator-goto-bg-color: transparent;
+  --paginator-goto-text-color: #459df5;
+  --paginator-goto-border-color: transparent;
+}
+
+/* Темная тема */
+:root[theme="dark"] ._ {
+  --paginator-bg-color: transparent;
+
+  --paginator__page-bg-color: transparent;
+  --paginator__page-text-color: #459df5;
+  --paginator__page-border-color: transparent;
+
+  --paginator-active__page-bg-color: #459df5;
+  --paginator-active__page-text-color: #2b2d33;
+  --paginator-active__page-border-color: transparent;
+
+  --paginator-goto-bg-color: transparent;
+  --paginator-goto-text-color: #459df5;
+  --paginator-goto-border-color: transparent;
+}
+
+._ {
+  display: flex;
+  flex-direction: row;
+  gap: 0.625rem;
+  background-color: var(--paginator-bg-color);
+}
+
+/*.paginator__item {*/
+/*    font-family: "Ubuntu";*/
+/*    font-style: normal;*/
+/*    font-weight: 400;*/
+/*    font-size: 0.8125rem;*/
+/*    line-height: 1rem;*/
+/*    display: flex;*/
+/*    flex-direction: row;*/
+/*    justify-content: center;*/
+/*    padding: 0.25rem 0.5rem;*/
+/*    gap: 0.25rem;*/
+/*    border-radius: 0.25rem;*/
+/*    background-color: var(--paginator__page-bg-color);*/
+/*    color: var(--paginator__page-text-color);*/
+/*    border: var(--paginator__page-border-color) 0.0625rem solid;*/
+/*}*/
+
+/*.paginatorActive {*/
+/*    background-color: var(--paginator-active__page-bg-color);*/
+/*    color: var(--paginator-active__page-text-color);*/
+/*    border: var(--paginator-active__page-border-color) 0.0625rem solid;*/
+/*}*/
+
+/*.paginatorGoto {*/
+/*    background-color: var(--paginator-goto-bg-color);*/
+/*    color: var(--paginator-goto-text-color);*/
+/*    border: var(--paginator-goto-border-color) 0.0625rem solid;*/
+/*}*/
+
+/*.paginatorLink,*/
+/*.paginatorGoto {*/
+/*    cursor: pointer;*/
+/*}*/
+
+/*.paginatorGoto {*/
+/*    margin-left: 0.625rem;*/
+/*}*/
