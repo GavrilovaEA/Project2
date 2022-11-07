@@ -71,9 +71,6 @@
 }
 
 .label {
-  font-family: "Ubuntu";
-  font-style: normal;
-  font-weight: 400;
   font-size: 0.8125rem;
   line-height: 1rem;
   padding-top: 0.5rem;
@@ -116,18 +113,12 @@
 .mask {
   display: block;
   height: 1rem;
-  font-family: "Ubuntu";
-  font-style: normal;
-  font-weight: 400;
   font-size: 0.8125rem;
   line-height: 1rem;
   flex: none;
 }
 
 .input {
-  /*font-family: 'Ubuntu';*/
-  /*font-style: normal;*/
-  font-weight: 400;
   font-size: 0.8125rem;
   line-height: 1rem;
   width: 0.625rem;

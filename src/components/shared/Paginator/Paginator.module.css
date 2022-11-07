@@ -1,0 +1,40 @@
+/* Светлая тема */
+._ {
+  --paginator-bg-color: transparent;
+
+  --paginator__page-bg-color: transparent;
+  --paginator__page-text-color: #459df5;
+  --paginator__page-border-color: transparent;
+
+  --paginator-active__page-bg-color: #459df5;
+  --paginator-active__page-text-color: #ffffff;
+  --paginator-active__page-border-color: transparent;
+
+  --paginator-goto-bg-color: transparent;
+  --paginator-goto-text-color: #459df5;
+  --paginator-goto-border-color: transparent;
+}
+
+/* Темная тема */
+:root[theme="dark"] ._ {
+  --paginator-bg-color: transparent;
+
+  --paginator__page-bg-color: transparent;
+  --paginator__page-text-color: #459df5;
+  --paginator__page-border-color: transparent;
+
+  --paginator-active__page-bg-color: #459df5;
+  --paginator-active__page-text-color: #2b2d33;
+  --paginator-active__page-border-color: transparent;
+
+  --paginator-goto-bg-color: transparent;
+  --paginator-goto-text-color: #459df5;
+  --paginator-goto-border-color: transparent;
+}
+
+._ {
+  display: flex;
+  flex-direction: row;
+  gap: 0.625rem;
+  background-color: var(--paginator-bg-color);
+}

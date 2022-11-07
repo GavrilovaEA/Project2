@@ -1,8 +1,9 @@
+import React from "react";
 import { PageHeader } from "./PageHeader/PageHeader";
 import { FilterBar } from "./FilterBar/FilterBar";
-import styles from "./Orders.module.css";
-import { Table } from "./Table/Table";
+import { OrdersTable } from "./OrdersTable/OrdersTable";
 import { loadOrders } from "../../../dbase/data";
+import styles from "./Orders.module.css";
 
 export const Orders = () => {
   const applyFilter = (filter) => {
@@ -15,7 +16,7 @@ export const Orders = () => {
     <div className={styles._}>
       <PageHeader />
       <FilterBar onApplyFilter={applyFilter} />
-      <Table data={ordersList} />
+      <OrdersTable data={ordersList} />
     </div>
   );
 };

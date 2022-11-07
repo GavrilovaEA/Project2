@@ -1,0 +1,28 @@
+/* Светлая тема */
+._ {
+  --table__body__row__cell-bg-color: transparent;
+  --table__body__row__cell__text-color: #000000;
+}
+
+/*Темная тема */
+:root[theme="dark"] ._ {
+  --table__body__row__cell-bg-color: transparent;
+  --table__body__row__cell__text-color: #bcc4cc;
+}
+
+._ {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  background-color: var(--table__body__row__cell-bg-color);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.25rem;
+  height: 2.5rem;
+}
+
+._ {
+  font-size: 0.8125rem;
+  line-height: 1rem;
+  color: var(--table__body__row__cell__text-color);
+}
