@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "../../../shared/Button/Button";
 import { Dropdown } from "../../../shared/Dropdown/Dropdown";
 import styles from "./PageHeader.module.css";
@@ -6,40 +6,31 @@ import styles from "./PageHeader.module.css";
 export const PageHeader = () => {
   const html = document.getElementsByTagName("html")[0];
 
-  const [themeName, setThemeName] = useState(
-    html.getAttribute("theme") || "light"
-  );
+  const [theme, setTheme] = useState(html.getAttribute("theme") || "light");
 
   // Установка темы
-  const setTheme = (theme) => {
-    switch (theme) {
-      case "light":
-        html.removeAttribute("theme");
-        setThemeName(theme);
-        break;
-      case "dark":
-        html.setAttribute("theme", "dark");
-        setThemeName(theme);
-        break;
-      default:
-    }
-  };
+  useEffect(() => {
+    html.setAttribute("theme", theme);
+    // eslint-disable-next-line
+  }, [theme]);
 
   // Содержимое формы выбора темы
   const dlgTheme = [
-    <div className="dropdown__caption">Выберите тему</div>,
+    <div className={styles.dlgCaption}>Выберите тему</div>,
     <Button
-      iconName={"sun"}
-      small
-      reverse={themeName === "dark"}
+      key="sun"
+      iconName="sun"
+      size="small"
+      theme={theme === "dark" ? "reverse" : ""}
       onClick={() => setTheme("light")}
     >
       Светлая
     </Button>,
     <Button
-      iconName={"moon"}
-      small
-      reverse={themeName === "light"}
+      key="moon"
+      iconName="moon"
+      size="small"
+      theme={theme === "light" ? "reverse" : ""}
       onClick={() => setTheme("dark")}
     >
       Темная
@@ -53,10 +44,10 @@ export const PageHeader = () => {
         trigger={
           <Button
             className={styles.buttonTheme}
-            iconName={themeName === "light" ? "sun" : "moon"}
-            reverse
+            iconName={theme === "light" ? "sun" : "moon"}
+            theme="reverse"
           >
-            {themeName === "light" ? "Светлая" : "Темная"}
+            {theme === "light" ? "Светлая" : "Темная"}
           </Button>
         }
         overlay={dlgTheme}

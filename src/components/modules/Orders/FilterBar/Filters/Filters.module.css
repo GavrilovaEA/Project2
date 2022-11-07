@@ -1,3 +1,13 @@
+/*Светлая тема*/
+._ {
+  --input__icoSearch-color: #459df5;
+}
+
+/*Темная тема*/
+:root[theme="dark"] ._ {
+  --input__icoSearch-color: #459df5;
+}
+
 ._ {
   display: flex;
   flex-direction: row;
@@ -13,11 +23,22 @@
   gap: 1rem;
 }
 
-.inputFind {
+.iconSearch {
+  width: 1rem;
+  height: 1rem;
+  flex: none;
+}
+
+.iconSearch {
+  fill: var(--input__icoSearch-color);
+  stroke: var(--input__icoSearch-color);
+}
+
+.inputSearch {
   width: 20rem;
 }
 
-.inputFind .input__field {
+.inputSearch .input__field {
   margin-top: 0;
 }
 

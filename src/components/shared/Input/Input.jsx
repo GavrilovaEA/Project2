@@ -1,18 +1,16 @@
 import classnames from "classnames";
-import { InputButton } from "./InputButton/InputButton";
-import { Icon } from "../Icon/Icon";
 import styles from "./Input.module.css";
+import { Icon } from "../Icon/Icon";
 
 export const Input = ({
   className,
   disabled,
   value,
   incorrect,
-  combobox,
-  onClickButton,
+  onReset,
   label,
-  iconName,
-  maskText,
+  prefix,
+  postfix,
   placeholder,
   onChange,
 }) => {
@@ -22,41 +20,42 @@ export const Input = ({
       [styles.disabled]: disabled,
       [styles.empty]: value === "",
       [styles.incorrect]: incorrect,
-      [styles.combobox]: combobox,
       [styles.nolabel]: !label,
     },
     className
   );
-
-  let buttonIconName = "";
-  if (value) {
-    buttonIconName = "x";
-  }
-  if (disabled) {
-    buttonIconName = "lock";
-  }
-  if (combobox) {
-    buttonIconName = "down";
-  }
 
   return (
     <div className={componentClass}>
       <label className={styles.label}>
         {label}
         <div className={styles.field}>
-          {iconName && <Icon className={styles.icoLeft} iconName={iconName} />}
-          {maskText && <span className={styles.mask}>{maskText}</span>}
+          {prefix && <div className={styles.prefix}>{prefix}</div>}
           <input
             className={styles.input}
             type="text"
             value={value}
+            readOnly={!onChange}
             placeholder={placeholder}
             disabled={disabled}
             onChange={onChange}
           />
-          {buttonIconName && (
-            <InputButton iconName={buttonIconName} onClick={onClickButton} />
-          )}
+          <div className={styles.postfix} onClick={onReset}>
+            {postfix ? (
+              postfix
+            ) : disabled ? (
+              <Icon className={styles.icoRight} iconName="lock" />
+            ) : (
+              onReset &&
+              value && (
+                <Icon
+                  className={styles.icoRight}
+                  iconName="x"
+                  onClick={onReset}
+                />
+              )
+            )}
+          </div>
         </div>
       </label>
     </div>

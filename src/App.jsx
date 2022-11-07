@@ -1,7 +1,7 @@
 import { Orders } from "./components/modules/Orders/Orders";
 function App() {
   return (
-    <div className={"App"}>
+    <div className="App">
       <Orders />
     </div>
   );

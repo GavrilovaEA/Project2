@@ -1,18 +1,17 @@
-import { FilterStr } from "./FilterStr/FilterStr";
+import { Filters } from "./Filters/Filters";
 import { FilterForm } from "./FilterForm/FilterForm";
-import { loadStatus } from "../../../../dbase/data";
 import { useState } from "react";
 import styles from "./FilterBar.module.css";
 
 export const FilterBar = ({ onApplyFilter }) => {
   // Состояния
   const [isShowForm, setShowForm] = useState(false);
-  const [find, setFind] = useState("");
+  const [search, setSearch] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-  const [startSumma, setStartSumma] = useState("");
-  const [endSumma, setEndSumma] = useState("");
-  const [statusSelected, setStatusSelected] = useState([]);
+  const [startAmount, setStartAmount] = useState("");
+  const [endAmount, setEndAmount] = useState("");
+  const [selectedStatuses, setStatusSelected] = useState([]);
 
   // Демонстрация работы индикатора
   let loading = isShowForm;
@@ -20,24 +19,26 @@ export const FilterBar = ({ onApplyFilter }) => {
   // Клик на элементе выпадающего списка
   const onSelectStatusList = (id) => {
     setStatusSelected(
-      statusSelected.includes(id)
-        ? statusSelected.filter((item) => item !== id)
-        : [...statusSelected, id]
+      selectedStatuses.includes(id)
+        ? selectedStatuses.filter((item) => item !== id)
+        : [...selectedStatuses, id]
     );
   };
 
   // Валидация даты
   const validateDate = (value) => {
     if (value === "") return true;
-    let result = true;
-    let aTmp = value.split(".");
-    if (aTmp.length !== 3) {
-      result = false;
+    let dateArr = value.split(".");
+    if (dateArr.length !== 3) {
+      return false;
     }
-    if (new Date(aTmp[2] + "-" + aTmp[1] + "-" + aTmp[0]) == "Invalid Date") {
-      result = false;
+    const [day, month, year] = dateArr;
+    if (
+      new Date(year + "-" + month + "-" + day).toString() === "Invalid Date"
+    ) {
+      return false;
     }
-    return result;
+    return true;
   };
 
   // Валидация целого числа
@@ -53,15 +54,15 @@ export const FilterBar = ({ onApplyFilter }) => {
     if (
       validateDate(startDate) &&
       validateDate(endDate) &&
-      validateInt(startSumma) &&
-      validateInt(endSumma)
+      validateInt(startAmount) &&
+      validateInt(endAmount)
     ) {
       const result = {
         startDate: startDate,
         endDate: endDate,
-        startSumma: startSumma,
-        endSumma: endSumma,
-        statusSelected: statusSelected,
+        startAmount: startAmount,
+        endAmount: endAmount,
+        selectedStatuses: selectedStatuses,
       };
       onApplyFilter && onApplyFilter(result);
     } else {
@@ -74,37 +75,37 @@ export const FilterBar = ({ onApplyFilter }) => {
     setStartDate("");
     setEndDate("");
     setStatusSelected([]);
-    setStartSumma("");
-    setEndSumma("");
+    setStartAmount("");
+    setEndAmount("");
   };
 
   return (
     <div className={styles._} id="filter">
-      <FilterStr
+      <Filters
         showForm={isShowForm}
-        onChangeFind={(value) => setFind(value)}
+        onChangeSearch={(value) => setSearch(value)}
         onClickButtonFilter={() => setShowForm(!isShowForm)}
         onResetFilter={onResetFilter}
-        find={find}
+        search={search}
         loading={loading}
       />
       {isShowForm && (
         <FilterForm
           startDate={startDate}
-          validStartDate={validateDate(startDate)}
+          isValidStartDate={validateDate(startDate)}
           endDate={endDate}
-          validEndDate={validateDate(endDate)}
-          statusSelected={statusSelected}
-          startSumma={startSumma}
-          validStartSumma={validateInt(startSumma)}
-          endSumma={endSumma}
-          validEndSumma={validateInt(endSumma)}
+          isValidEndDate={validateDate(endDate)}
+          selectedStatuses={selectedStatuses}
+          startAmount={startAmount}
+          isValidStartAmount={validateInt(startAmount)}
+          endAmount={endAmount}
+          isValidEndAmount={validateInt(endAmount)}
           onClickApply={onClickApply}
           onSelectStatusList={onSelectStatusList}
           onChangeStartDate={(value) => setStartDate(value)}
           onChangeEndDate={(value) => setEndDate(value)}
-          onChangeStartSumma={(value) => setStartSumma(value)}
-          onChangeEndSumma={(value) => setEndSumma(value)}
+          onChangeStartAmount={(value) => setStartAmount(value)}
+          onChangeEndAmount={(value) => setEndAmount(value)}
         />
       )}
     </div>

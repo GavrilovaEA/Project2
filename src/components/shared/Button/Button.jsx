@@ -4,9 +4,8 @@ import styles from "./Button.module.css";
 
 export const Button = ({
   className,
-  small,
-  blackReverse,
-  reverse,
+  size,
+  theme,
   widthAll,
   iconName,
   iconClass,
@@ -16,9 +15,8 @@ export const Button = ({
   const componentClass = cn(
     styles._,
     {
-      [styles.size_small]: small,
-      [styles.blackReverse]: blackReverse,
-      [styles.reverse]: reverse,
+      [styles["size_" + size]]: size,
+      [styles[theme]]: theme,
       [styles.widthAll]: widthAll,
     },
     className

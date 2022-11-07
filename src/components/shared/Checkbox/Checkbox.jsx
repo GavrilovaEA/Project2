@@ -14,12 +14,12 @@ export const Checkbox = ({
   return (
     <label className={componentClass}>
       <input
-        type={"checkbox"}
+        type="checkbox"
         className={styles.input}
         checked={checked}
         onChange={onChange}
       />
-      {!noindicator && <Icon className={styles.ico} iconName={"checkbox"} />}
+      {!noindicator && <Icon className={styles.ico} iconName="checkbox" />}
       {text && <span className={styles.text}>{text}</span>}
     </label>
   );

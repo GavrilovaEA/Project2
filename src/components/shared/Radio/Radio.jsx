@@ -15,13 +15,13 @@ export const Radio = ({
   return (
     <label className={componentClass}>
       <input
-        type={"radio"}
+        type="radio"
         className={styles.input}
         name={name}
         checked={checked}
         onChange={onChange}
       />
-      {!noindicator && <Icon className={styles.ico} iconName={"radio"} />}
+      {!noindicator && <Icon className={styles.ico} iconName="radio" />}
       {text && <span className={styles.text}>{text}</span>}
     </label>
   );

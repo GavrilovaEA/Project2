@@ -1,17 +1,17 @@
-import { ReactComponent as SvgSun } from "../../../assets/sun.svg";
-import { ReactComponent as SvgMoon } from "../../../assets/moon.svg";
-import { ReactComponent as SvgLoad } from "../../../assets/load.svg";
-import { ReactComponent as SvgFilter } from "../../../assets/filter.svg";
-import { ReactComponent as SvgEdit } from "../../../assets/edit.svg";
-import { ReactComponent as SvgRecycle } from "../../../assets/recycle.svg";
-import { ReactComponent as SvgXLarge } from "../../../assets/xLarge.svg";
-import { ReactComponent as SvgApply } from "../../../assets/apply.svg";
-import { ReactComponent as SvgFind } from "../../../assets/find.svg";
-import { ReactComponent as SvgLock } from "../../../assets/lock.svg";
-import { ReactComponent as SvgX } from "../../../assets/x.svg";
-import { ReactComponent as SvgDown } from "../../../assets/down.svg";
-import { ReactComponent as SvgRadio } from "../../../assets/radio.svg";
-import { ReactComponent as SvgCheckbox } from "../../../assets/checkbox.svg";
+import { ReactComponent as SvgSun } from "./icons/sun.svg";
+import { ReactComponent as SvgMoon } from "./icons/moon.svg";
+import { ReactComponent as SvgLoad } from "./icons/load.svg";
+import { ReactComponent as SvgFilter } from "./icons/filter.svg";
+import { ReactComponent as SvgEdit } from "./icons/edit.svg";
+import { ReactComponent as SvgRecycle } from "./icons/recycle.svg";
+import { ReactComponent as SvgXLarge } from "./icons/xLarge.svg";
+import { ReactComponent as SvgApply } from "./icons/apply.svg";
+import { ReactComponent as SvgSearch } from "./icons/search.svg";
+import { ReactComponent as SvgLock } from "./icons/lock.svg";
+import { ReactComponent as SvgX } from "./icons/x.svg";
+import { ReactComponent as SvgDown } from "./icons/down.svg";
+import { ReactComponent as SvgRadio } from "./icons/radio.svg";
+import { ReactComponent as SvgCheckbox } from "./icons/checkbox.svg";
 
 export const Icon = ({ iconName, className }) => {
   switch (iconName) {
@@ -39,8 +39,8 @@ export const Icon = ({ iconName, className }) => {
     case "apply":
       return <SvgApply className={className} />;
 
-    case "find":
-      return <SvgFind className={className} />;
+    case "search":
+      return <SvgSearch className={className} />;
 
     case "lock":
       return <SvgLock className={className} />;
