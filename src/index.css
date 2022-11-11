@@ -1,0 +1,23 @@
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap");
+
+body {
+  margin: 0;
+}
+
+:root {
+  --bg-color: #ffffff;
+}
+
+:root[theme="dark"] {
+  --bg-color: #2b2d33;
+}
+
+body {
+  background-color: var(--bg-color);
+}
+
+/*body * {*/
+/*  font-family: 'Ubuntu';*/
+/*  font-style: normal;*/
+/*  font-weight: 400;*/
+/*}*/

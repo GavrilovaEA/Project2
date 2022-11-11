@@ -1,0 +1,61 @@
+/* Светлая тема */
+._ {
+  --loadIndicator-bg-color: transparent;
+  --loadIndicator__ico-color: #459df5;
+  --loadIndicator__ico-opacity: 0.5;
+  --loadIndicator__text-color: #459df5;
+}
+
+/* Темная тема */
+:root[theme="dark"] ._ {
+  --loadIndicator-bg-color: transparent;
+  --loadIndicator__ico-color: #459df5;
+  --loadIndicator__ico-opacity: 1;
+  --loadIndicator__text-color: #459df5;
+}
+
+._ {
+  border: none;
+  padding: 0.5rem 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 0.5rem;
+  height: 1rem;
+}
+
+.ico {
+  width: 1rem;
+  height: 1rem;
+}
+
+.loading {
+  animation: rotate 1s infinite;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+._ {
+  font-family: "Ubuntu";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 0.8125rem;
+}
+
+._ {
+  background: var(--loadIndicator-bg-color);
+  color: var(--loadIndicator__text-color);
+}
+
+.ico {
+  opacity: var(--loadIndicator__ico-opacity);
+  stroke: var(--loadIndicator__ico-color);
+  fill: var(--loadIndicator__ico-color);
+}

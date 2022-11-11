@@ -1,0 +1,52 @@
+/*Светлая тема*/
+._ {
+  --input__icoSearch-color: #459df5;
+}
+
+/*Темная тема*/
+:root[theme="dark"] ._ {
+  --input__icoSearch-color: #459df5;
+}
+
+._ {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: var(--filter-bar_str_bg-color);
+  align-self: stretch;
+}
+
+.groupItem {
+  display: flex;
+  flex-direction: row;
+  justify-items: flex-end;
+  gap: 1rem;
+}
+
+.iconSearch {
+  width: 1rem;
+  height: 1rem;
+  flex: none;
+}
+
+.iconSearch {
+  fill: var(--input__icoSearch-color);
+  stroke: var(--input__icoSearch-color);
+}
+
+.inputSearch {
+  width: 20rem;
+}
+
+.inputSearch .input__field {
+  margin-top: 0;
+}
+
+.buttonShow {
+  --button__ico-opacity: 1;
+  --button_reverse__ico-opacity: 1;
+}
+
+.buttonLoad {
+  --button_reverse__ico-opacity: 1;
+}
