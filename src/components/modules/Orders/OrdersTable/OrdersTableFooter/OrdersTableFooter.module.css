@@ -1,0 +1,41 @@
+/* Светлая тема */
+
+.recordDelete {
+  --button-bg-color: #f53152;
+  --button__ico-opacity: 1;
+  --button__ico-color: #ffffff;
+  --button__text-color: #ffffff;
+  --button-hover-bg-color: #c92f4d;
+}
+
+/* Темная тема */
+:root[theme="dark"] .recordDelete {
+  --button-bg-color: #f53152;
+  --button__ico-opacity: 1;
+  --button__ico-color: #ffffff;
+  --button__text-color: #ffffff;
+  --button-hover-bg-color: #c92f4d;
+}
+
+.action {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0;
+  gap: 1rem;
+  height: 1.5rem;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.recordCount {
+  font-size: 13px;
+  line-height: 16px;
+  color: var(--table__foot__action__rec-count-text-color);
+}
+
+.recordDelete .button__ico {
+  fill: none;
+  stroke: var(--button__ico-color);
+}

@@ -1,0 +1,91 @@
+/* Светлая тема */
+._ {
+  --radio__ico-bg-color: #ffffff;
+  --radio__ico-color: #ffffff;
+  --radio__text-color: #000000;
+  --radio-border-color: #bad8f5;
+  --radio-hover-bg-color: #bad8f5;
+  --radio-hover__text-color: #459df5;
+
+  --radio-checked__ico-bg-color: #459df5;
+  --radio-checked__ico-color: #ffffff;
+  --radio-checked__text-color: #459df5;
+  --radio-checked-border-color: #459df5;
+  --radio-checked-hover__text-color: #000000;
+}
+
+/* Темная тема */
+:root[theme="dark"] ._ {
+  --radio__ico-bg-color: #2b2d33;
+  --radio__ico-color: #2b2d33;
+  --radio__text-color: #bcc4cc;
+  --radio-border-color: #454e52;
+  --radio-hover-bg-color: #64748a;
+  --radio-hover__text-color: #459df5;
+
+  --radio-checked__ico-bg-color: #459df5;
+  --radio-checked__ico-color: #ffffff;
+  --radio-checked__text-color: #459df5;
+  --radio-checked-border-color: #459df5;
+  --radio-checked-hover__text-color: #000000;
+}
+
+._ {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.radio_hover:hover {
+  background-color: var(--radio-hover-bg-color);
+}
+
+.text {
+  font-size: 0.8125rem;
+}
+
+.radio_hover:hover .text {
+  color: var(--radio-hover__text-color) !important;
+}
+
+.radio_hover:hover .input:checked ~ .text {
+  color: var(--radio-checked-hover__text-color) !important;
+}
+
+.input {
+  appearance: none;
+  display: none;
+}
+
+.input:checked ~ .text {
+  color: var(--radio-checked__text-color);
+}
+
+.input:not(:checked) ~ .text {
+  color: var(--radio__text-color);
+}
+
+.ico {
+  box-sizing: border-box;
+  width: 0.875rem;
+  height: 0.875rem;
+  fill: var(--radio__ico-bg-color);
+  stroke: none;
+  border: 0.0625rem solid var(--radio-border-color);
+}
+
+.input ~ .ico {
+  border-radius: 1rem;
+}
+
+.input:not(:checked) ~ .ico {
+  background: var(--radio__ico-bg-color);
+}
+
+.input:checked ~ .ico {
+  border-color: var(--radio-checked-border-color);
+  background: var(--radio-checked__ico-bg-color);
+  fill: var(--radio-checked__ico-color);
+}

@@ -1,0 +1,33 @@
+/* Сетлая тема */
+._ {
+  --table__body-bg-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  flex: auto;
+}
+
+/* Темная тема */
+:root[theme="dark"] ._ {
+  --table__body-bg-color: #2b2d33;
+}
+
+._ {
+  background-color: var(--table__body-bg-color);
+  overflow-y: scroll;
+}
+
+._::-webkit-scrollbar {
+  width: 0.25rem;
+}
+._::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+}
+._::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.34);
+  border-radius: 0.5rem;
+}
+
+._ {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.34) rgba(0, 0, 0, 0.1);
+}

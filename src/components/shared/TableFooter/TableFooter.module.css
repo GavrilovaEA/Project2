@@ -1,0 +1,22 @@
+/* Светлая тема */
+._ {
+  --table__foot-bg-color: #ebf0f5;
+  --table__foot__action__rec-count-text-color: #459df5;
+}
+
+/* Темная тема */
+:root[theme="dark"] ._ {
+  --table__foot-bg-color: #171b1f;
+  --table__foot__action__rec-count-text-color: #459df5;
+}
+
+._ {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  height: 2.5rem;
+  background: var(--table__foot-bg-color);
+}

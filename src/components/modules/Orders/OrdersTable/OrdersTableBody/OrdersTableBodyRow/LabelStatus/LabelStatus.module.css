@@ -1,0 +1,107 @@
+/* Светлая тема */
+._ {
+  --label-status-bg-color: transparent;
+  --label-status__text-color: #000000;
+  --label-status__ico-color: #000000;
+
+  --label-status_status-new__text-color: #000000;
+  --label-status_status-calculation__text-color: #000000;
+  --label-status_status-confirmed__text-color: #000000;
+  --label-status_status-postponed__text-color: #000000;
+  --label-status_status-complete__text-color: #0fb864;
+  --label-status_status-canceled__text-color: #000000;
+}
+
+/* Темная тема */
+:root[theme="dark"] ._ {
+  --label-status-bg-color: transparent;
+  --label-status__text-color: #000000;
+  --label-status__ico-color: #000000;
+
+  --label-status_status-new__text-color: #bcc4cc;
+  --label-status_status-calculation__text-color: #bcc4cc;
+  --label-status_status-confirmed__text-color: #bcc4cc;
+  --label-status_status-postponed__text-color: #bcc4cc;
+  --label-status_status-complete__text-color: #0fb864;
+  --label-status_status-canceled__text-color: #bcc4cc;
+}
+
+._ {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 0;
+  gap: 0.25rem;
+  height: 1rem;
+  background-color: var(--label-status-bg-color);
+}
+
+.icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+.text {
+  font-size: 0.8125rem;
+  line-height: 1rem;
+  color: var(--label-status__text-color);
+  font-weight: 400;
+}
+
+.new .icon {
+  background-image: url("./icons/statusNew.svg");
+}
+
+.new .text::after {
+  content: "Новый";
+  color: var(--label-status_status-new__text-color);
+}
+
+.calculation .icon {
+  background-image: url("./icons/statusCalculation.svg");
+}
+.calculation .text::after {
+  content: "Рассчет";
+  color: var(--label-status_status-calculation__text-color);
+}
+
+.canceled {
+  opacity: 0.5;
+}
+
+.canceled .icon {
+  background-image: url("./icons/statusCanceled.svg");
+}
+.canceled .text::after {
+  content: "Отменен";
+  color: var(--label-status_status-canceled__text-color);
+}
+
+.complete {
+  opacity: 0.5;
+}
+
+.complete .icon {
+  background-image: url("./icons/statusComplete.svg");
+}
+
+.complete .text::after {
+  content: "Выполнен";
+  color: var(--label-status_status-complete__text-color);
+}
+
+.confirmed .icon {
+  background-image: url("./icons/statusConfirmed.svg");
+}
+.confirmed .text::after {
+  content: "Подтвержден";
+  color: var(--label-status_status-confirmed__text-color);
+}
+
+.postponed .icon {
+  background-image: url("./icons/statusPostponed.svg");
+}
+.postponed .text::after {
+  content: "Отложен";
+  color: var(--label-status_status-postponed__text-color);
+}

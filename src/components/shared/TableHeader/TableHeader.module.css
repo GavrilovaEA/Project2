@@ -1,0 +1,23 @@
+/*Светлая тема */
+._ {
+  --table__head-bg-color: #459df5;
+}
+
+/*Темная тема */
+:root[theme="dark"] ._ {
+  --table__head-bg-color: #459df5;
+}
+
+._ {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 0;
+  padding-left: 0.5rem;
+  height: 2.5rem;
+  background: var(--table__head-bg-color);
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+}

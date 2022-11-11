@@ -1,0 +1,91 @@
+/* Светлая тема */
+._ {
+  --checkbox__ico-bg-color: #ffffff;
+  --checkbox__ico-color: #ffffff;
+  --checkbox__text-color: #000000;
+  --checkbox-border-color: #bad8f5;
+  --checkbox-hover-bg-color: #bad8f5;
+  --checkbox-hover__text-color: #459df5;
+
+  --checkbox-checked__ico-bg-color: #459df5;
+  --checkbox-checked__ico-color: #ffffff;
+  --checkbox-checked__text-color: #459df5;
+  --checkbox-checked-border-color: #459df5;
+  --checkbox-checked-hover__text-color: #000000;
+}
+
+/* Темная тема */
+:root[theme="dark"] ._ {
+  --checkbox__ico-bg-color: #2b2d33;
+  --checkbox__ico-color: #2b2d33;
+  --checkbox__text-color: #bcc4cc;
+  --checkbox-border-color: #454e52;
+  --checkbox-hover-bg-color: #64748a;
+  --checkbox-hover__text-color: #459df5;
+
+  --checkbox-checked__ico-bg-color: #459df5;
+  --checkbox-checked__ico-color: #ffffff;
+  --checkbox-checked__text-color: #459df5;
+  --checkbox-checked-border-color: #459df5;
+  --checkbox-checked-hover__text-color: #000000;
+}
+
+._ {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.checkbox_hover:hover {
+  background-color: var(--checkbox-hover-bg-color);
+}
+
+.text {
+  font-size: 0.8125rem;
+}
+
+.checkbox_hover:hover .text {
+  color: var(--checkbox-hover__text-color) !important;
+}
+
+.checkbox_hover:hover .input:checked ~ .text {
+  color: var(--checkbox-checked-hover__text-color) !important;
+}
+
+.input {
+  appearance: none;
+  display: none;
+}
+
+.input:checked ~ .text {
+  color: var(--checkbox-checked__text-color);
+}
+
+.input:not(:checked) ~ .text {
+  color: var(--checkbox__text-color);
+}
+
+.ico {
+  box-sizing: border-box;
+  width: 0.875rem;
+  height: 0.875rem;
+  fill: var(--checkbox__ico-bg-color);
+  stroke: none;
+  border: 0.0625rem solid var(--checkbox-border-color);
+}
+
+.input ~ .ico {
+  border-radius: 0.125rem;
+}
+
+.input:not(:checked) ~ .ico {
+  background: var(--checkbox__ico-bg-color);
+}
+
+.input:checked ~ .ico {
+  border-color: var(--checkbox-checked-border-color);
+  background: var(--checkbox-checked__ico-bg-color);
+  fill: var(--checkbox-checked__ico-color);
+}
