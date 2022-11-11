@@ -20,16 +20,16 @@ export const Dropdown = ({ trigger, overlay, className }) => {
     };
   }, []);
 
+  // Добавление управляющему элементу события onClick
+  const newTrigger = React.cloneElement(trigger, {
+    onClick: (e) => {
+      setShow(!isShow);
+    },
+  });
+
   return (
     <div className={styles._} ref={refDropdown}>
-      <div
-        onClick={(e) => {
-          e.preventDefault();
-          setShow(!isShow);
-        }}
-      >
-        {trigger}
-      </div>
+      {newTrigger}
       {isShow && <div className={cn(styles.overlay, className)}>{overlay}</div>}
     </div>
   );

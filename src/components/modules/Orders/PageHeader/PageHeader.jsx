@@ -3,15 +3,14 @@ import { Button } from "../../../shared/Button/Button";
 import { Dropdown } from "../../../shared/Dropdown/Dropdown";
 import styles from "./PageHeader.module.css";
 
-export const PageHeader = () => {
-  const html = document.getElementsByTagName("html")[0];
+const html = document.getElementsByTagName("html")[0];
 
+export const PageHeader = () => {
   const [theme, setTheme] = useState(html.getAttribute("theme") || "light");
 
   // Установка темы
   useEffect(() => {
     html.setAttribute("theme", theme);
-    // eslint-disable-next-line
   }, [theme]);
 
   // Содержимое формы выбора темы
