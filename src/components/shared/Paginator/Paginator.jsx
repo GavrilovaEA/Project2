@@ -1,9 +1,22 @@
 import { PaginatorItem } from "./PaginatorItem/PaginatorItem";
 import styles from "./Paginator.module.css";
+import { Dropdown } from "../Dropdown/Dropdown";
+import { Input } from "../Input/Input";
+import { useState } from "react";
 
 export const Paginator = ({ pageCur, pageCount, onGotoPage }) => {
-  const onInputPage = () => {
-    console.log("Отобразить диалог запроса номера страницы");
+  const [numPage, setNumPage] = useState("");
+
+  const onKeyDown = (event) => {
+    if (event.code === "Enter" || event.code === "NumpadEnter") {
+      if (+numPage >= 1 && +numPage <= pageCount) {
+        onGotoPage(+numPage);
+      }
+    }
+  };
+
+  const onChangeNumPage = (event) => {
+    setNumPage(event.target.value);
   };
 
   let firstPage = pageCur - 1;
@@ -14,6 +27,8 @@ export const Paginator = ({ pageCur, pageCount, onGotoPage }) => {
   if (firstPage > 2) leftDots = true;
   let rightDots = false;
   if (lastPage < pageCount - 1) rightDots = true;
+
+  const incorrect = !(+numPage >= 1 && +numPage <= pageCount);
 
   return (
     <div className={styles._}>
@@ -51,7 +66,20 @@ export const Paginator = ({ pageCur, pageCount, onGotoPage }) => {
           onClick={() => onGotoPage && onGotoPage(pageCount)}
         />
       )}
-      <PaginatorItem key="#" link text="#" onClick={onInputPage} />
+      <Dropdown
+        trigger={<PaginatorItem key="#" link text="#" />}
+        overlay={
+          <Input
+            label={"Номер страницы"}
+            placeholder={"Введите номер"}
+            onKeyDown={onKeyDown}
+            value={numPage}
+            onChange={onChangeNumPage}
+            incorrect={incorrect}
+          />
+        }
+        className={styles.dlgGotoPage}
+      ></Dropdown>
     </div>
   );
 };

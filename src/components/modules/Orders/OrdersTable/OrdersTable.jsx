@@ -2,23 +2,29 @@ import React, { useState } from "react";
 import { Table } from "../../../shared/Table/Table";
 import { OrdersTableHeader } from "./OrdersTableHeader/OrdersTableHeader";
 import { OrdersTableBody } from "./OrdersTableBody/OrdersTableBody";
-
 import { OrdersTableFooter } from "./OrdersTableFooter/OrdersTableFooter";
 
-export const OrdersTable = ({ data }) => {
-  const [sort, setSort] = useState({ field: "date", asc: true });
+import { useSelector } from "react-redux";
+import { selectOrders, selectSort } from "./ordersTableSlice";
 
-  const allSelect = false;
-  let paginator = { count: Math.ceil(data.length / 10), current: 1 };
+export const OrdersTable = () => {
+  const [allSelect, setAllSelect] = useState(false);
+
+  const { ordersList, paginator } = useSelector(selectOrders);
+  const sort = useSelector(selectSort);
+
+  // useEffect(() => {
+  //   dispatch(applyFilter({ ...filter, search }));
+  // }, [search, filter]);
 
   return (
     <Table>
       <OrdersTableHeader
         sort={sort}
         allSelect={allSelect}
-        setSort={(newSort) => setSort(newSort)}
+        onChangeAllSelect={() => setAllSelect(!allSelect)}
       />
-      <OrdersTableBody data={data} />
+      <OrdersTableBody data={ordersList} />
       <OrdersTableFooter recSelect={0} paginator={paginator} />
     </Table>
   );

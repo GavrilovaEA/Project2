@@ -3,10 +3,14 @@ import { Button } from "../../../../shared/Button/Button";
 import { Paginator } from "../../../../shared/Paginator/Paginator";
 
 import styles from "./OrdersTableFooter.module.css";
+import { useDispatch } from "react-redux";
+import { setPage } from "../ordersTableSlice";
 
 export const OrdersTableFooter = ({ recordSelected, paginator }) => {
+  const dispatch = useDispatch();
+
   const onGotoPage = (numberPage) => {
-    console.log("Переход на страницу " + numberPage);
+    dispatch(setPage(numberPage));
   };
 
   return (

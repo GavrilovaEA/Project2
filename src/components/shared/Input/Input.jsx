@@ -13,6 +13,7 @@ export const Input = ({
   postfix,
   placeholder,
   onChange,
+  onKeyDown,
 }) => {
   const componentClass = classnames(
     styles._,
@@ -39,6 +40,7 @@ export const Input = ({
             placeholder={placeholder}
             disabled={disabled}
             onChange={onChange}
+            onKeyDown={onKeyDown}
           />
           <div className={styles.postfix} onClick={onReset}>
             {postfix ? (

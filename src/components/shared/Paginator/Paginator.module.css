@@ -38,3 +38,13 @@
   gap: 0.625rem;
   background-color: var(--paginator-bg-color);
 }
+
+.dlgGotoPage {
+  bottom: 2rem;
+  right: -1rem;
+  width: 8rem;
+  padding: 1rem;
+  background: var(--dropdown-bg-color);
+  box-shadow: var(--dropdown-shadow);
+  border-radius: 0.5rem;
+}
