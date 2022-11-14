@@ -1,10 +1,10 @@
-import { TableFooter } from "../../../../shared/TableFooter/TableFooter";
-import { Button } from "../../../../shared/Button/Button";
-import { Paginator } from "../../../../shared/Paginator/Paginator";
+import { TableFooter } from "../../../../../shared/TableFooter/TableFooter";
+import { Button } from "../../../../../shared/Button/Button";
+import { Paginator } from "../../../../../shared/Paginator/Paginator";
 
 import styles from "./OrdersTableFooter.module.css";
 import { useDispatch } from "react-redux";
-import { setPage } from "../ordersTableSlice";
+import { setPage } from "../../../model/filtersSlice";
 
 export const OrdersTableFooter = ({ recordSelected, paginator }) => {
   const dispatch = useDispatch();

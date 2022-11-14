@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { Button } from "../../../shared/Button/Button";
-import { Dropdown } from "../../../shared/Dropdown/Dropdown";
+import { Button } from "../../../../shared/Button/Button";
+import { Dropdown } from "../../../../shared/Dropdown/Dropdown";
 import styles from "./PageHeader.module.css";
 
 const html = document.getElementsByTagName("html")[0];

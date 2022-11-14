@@ -1,19 +1,20 @@
 import cn from "classnames";
-import { Checkbox } from "../../../../shared/Checkbox/Checkbox";
-import { TableHeader } from "../../../../shared/TableHeader/TableHeader";
-import { TableHeaderCell } from "../../../../shared/TableHeaderCell/TableHeaderCell";
+import { Checkbox } from "../../../../../shared/Checkbox/Checkbox";
+import { TableHeader } from "../../../../../shared/TableHeader/TableHeader";
+import { TableHeaderCell } from "../../../../../shared/TableHeaderCell/TableHeaderCell";
 import styles from "./OrdersTableHeader.module.css";
 import stylesColumns from "../OrdersTableColumns.module.css";
-import stylesCell from "../../../../shared/TableHeaderCell/TableHeaderCell.module.css";
+import stylesCell from "../../../../../shared/TableHeaderCell/TableHeaderCell.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { selectSort, setSort } from "../ordersTableSlice";
+import { setSort } from "../../../model/sortSlice";
+import { selectSort } from "../../../model/ordersTableSelectors";
 
 export const OrdersTableHeader = ({ allSelect, onChangeAllSelect }) => {
   const dispatch = useDispatch();
   const sort = useSelector(selectSort);
 
   const onSort = (field) => {
-    dispatch(setSort(field));
+    dispatch(setSort({ fieldName: field }));
   };
 
   return (

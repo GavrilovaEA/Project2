@@ -1,9 +1,9 @@
-import { Input } from "../../../../shared/Input/Input";
-import { Button } from "../../../../shared/Button/Button";
+import { Input } from "../../../../../shared/Input/Input";
+import { Button } from "../../../../../shared/Button/Button";
 import styles from "./Filters.module.css";
-import { LoadIndicator } from "../../../../shared/LoadIndicator/LoadIndicator";
-import { Icon } from "../../../../shared/Icon/Icon";
-import { setSearch } from "../../OrdersTable/ordersTableSlice";
+import { LoadIndicator } from "../../../../../shared/LoadIndicator/LoadIndicator";
+import { Icon } from "../../../../../shared/Icon/Icon";
+import { setSearch } from "../../../model/filtersSlice";
 import { useDispatch } from "react-redux";
 
 export const Filters = ({
@@ -30,7 +30,10 @@ export const Filters = ({
           className={styles.inputSearch}
           placeholder="Номер заказа или ФИО"
           onChange={(e) => onChangeSearch(e.target.value)}
-          onReset={() => onChangeSearch("")}
+          onReset={() => {
+            onChangeSearch("");
+            dispatch(setSearch(""));
+          }}
           value={search}
           onKeyDown={onKeyDown}
         />

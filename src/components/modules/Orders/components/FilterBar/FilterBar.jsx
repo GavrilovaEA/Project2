@@ -3,11 +3,9 @@ import { FilterForm } from "./FilterForm/FilterForm";
 import { useState } from "react";
 import styles from "./FilterBar.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  setFilter,
-  selectFilter,
-  selectSearch,
-} from "../OrdersTable/ordersTableSlice";
+import { setFilter } from "../../model/filtersSlice";
+import { setSort } from "../../model/sortSlice";
+import { selectFilter, selectSearch } from "../../model/ordersTableSelectors";
 
 export const FilterBar = () => {
   // Состояния
@@ -95,6 +93,18 @@ export const FilterBar = () => {
     setStatusSelected([]);
     setStartAmount("");
     setEndAmount("");
+
+    dispatch(
+      setFilter({
+        startDate: "",
+        endDate: "",
+        startAmount: "",
+        endAmount: "",
+        selectedStatuses: [],
+      })
+    );
+
+    dispatch(setSort({ fieldName: "date", asc: false }));
   };
 
   return (

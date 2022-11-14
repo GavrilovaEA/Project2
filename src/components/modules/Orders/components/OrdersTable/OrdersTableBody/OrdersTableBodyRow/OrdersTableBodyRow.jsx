@@ -1,7 +1,7 @@
 import cn from "classnames";
-import { TableRow } from "../../../../../shared/TableRow/TableRow";
-import { TableCell } from "../../../../../shared/TableCell/TableCell";
-import { Checkbox } from "../../../../../shared/Checkbox/Checkbox";
+import { TableRow } from "../../../../../../shared/TableRow/TableRow";
+import { TableCell } from "../../../../../../shared/TableCell/TableCell";
+import { Checkbox } from "../../../../../../shared/Checkbox/Checkbox";
 import { LabelStatus } from "./LabelStatus/LabelStatus";
 import stylesColumns from "../../OrdersTableColumns.module.css";
 import styles from "./OrdersTableBodyRow.module.css";
@@ -11,6 +11,14 @@ export const OrdersTableBodyRow = ({ data }) => {
   const cellClass = cn(stylesColumns._, {
     [styles.selected]: checked,
   });
+
+  const formatDate = (date) => {
+    let [day, month, year] = date.split(".");
+    day = day.length < 2 ? "0" + day : day;
+    month = month.length < 2 ? "0" + month : month;
+    return [day, month, year].join(".");
+  };
+
   return (
     <TableRow>
       <TableCell className={cellClass}>
@@ -21,7 +29,7 @@ export const OrdersTableBodyRow = ({ data }) => {
         }
       </TableCell>
       <TableCell className={cellClass}>{id}</TableCell>
-      <TableCell className={cellClass}>{date}</TableCell>
+      <TableCell className={cellClass}>{formatDate(date)}</TableCell>
       <TableCell className={cellClass}>
         {<LabelStatus status={status} />}
       </TableCell>

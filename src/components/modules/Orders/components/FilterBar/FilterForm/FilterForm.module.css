@@ -19,6 +19,12 @@
   align-self: stretch;
 }
 
+.iconStatusWrapper {
+  width: 0.75rem;
+  display: flex;
+  align-item: center;
+}
+
 .iconStatus {
   width: 0.375rem;
   height: 0.375rem;

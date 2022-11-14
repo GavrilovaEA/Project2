@@ -28,38 +28,36 @@ export const Input = ({
 
   return (
     <div className={componentClass}>
-      <label className={styles.label}>
-        {label}
-        <div className={styles.field}>
-          {prefix && <div className={styles.prefix}>{prefix}</div>}
-          <input
-            className={styles.input}
-            type="text"
-            value={value}
-            readOnly={!onChange}
-            placeholder={placeholder}
-            disabled={disabled}
-            onChange={onChange}
-            onKeyDown={onKeyDown}
-          />
-          <div className={styles.postfix} onClick={onReset}>
-            {postfix ? (
-              postfix
-            ) : disabled ? (
-              <Icon className={styles.icoRight} iconName="lock" />
-            ) : (
-              onReset &&
-              value && (
-                <Icon
-                  className={styles.icoRight}
-                  iconName="x"
-                  onClick={onReset}
-                />
-              )
-            )}
-          </div>
+      <div className={styles.label}>{label}</div>
+      <div className={styles.field}>
+        {prefix && <div className={styles.prefix}>{prefix}</div>}
+        <input
+          className={styles.input}
+          type="text"
+          value={value}
+          readOnly={!onChange}
+          placeholder={placeholder}
+          disabled={disabled}
+          onChange={onChange}
+          onKeyDown={onKeyDown}
+        />
+        <div className={styles.postfix} onClick={onReset}>
+          {postfix ? (
+            postfix
+          ) : disabled ? (
+            <Icon className={styles.icoRight} iconName="lock" />
+          ) : (
+            onReset &&
+            value && (
+              <Icon
+                className={styles.icoRight}
+                iconName="x"
+                onClick={onReset}
+              />
+            )
+          )}
         </div>
-      </label>
+      </div>
     </div>
   );
 };
