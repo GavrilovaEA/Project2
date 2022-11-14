@@ -20,12 +20,8 @@
 
 .overlay {
   position: absolute;
-  /*padding: 1rem;*/
   background: var(--dropdown-bg-color);
   box-shadow: var(--dropdown-shadow);
   border-radius: 0.5rem;
-  /*display: flex;*/
-  /*flex-direction: column;*/
-  /*gap: 0.5rem;*/
   z-index: 5;
 }

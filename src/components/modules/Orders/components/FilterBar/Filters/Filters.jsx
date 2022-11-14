@@ -1,8 +1,10 @@
-import { Input } from "../../../../shared/Input/Input";
-import { Button } from "../../../../shared/Button/Button";
+import { Input } from "../../../../../shared/Input/Input";
+import { Button } from "../../../../../shared/Button/Button";
 import styles from "./Filters.module.css";
-import { LoadIndicator } from "../../../../shared/LoadIndicator/LoadIndicator";
-import { Icon } from "../../../../shared/Icon/Icon";
+import { LoadIndicator } from "../../../../../shared/LoadIndicator/LoadIndicator";
+import { Icon } from "../../../../../shared/Icon/Icon";
+import { setSearch } from "../../../model/filtersSlice";
+import { useDispatch } from "react-redux";
 
 export const Filters = ({
   search,
@@ -12,6 +14,14 @@ export const Filters = ({
   onResetFilter,
   loading,
 }) => {
+  const dispatch = useDispatch();
+
+  const onKeyDown = (event) => {
+    if (event.code === "NumpadEnter" || event.code === "Enter") {
+      dispatch(setSearch(search));
+    }
+  };
+
   return (
     <div className={styles._}>
       <div className={styles.groupItem}>
@@ -20,8 +30,12 @@ export const Filters = ({
           className={styles.inputSearch}
           placeholder="Номер заказа или ФИО"
           onChange={(e) => onChangeSearch(e.target.value)}
-          onReset={() => onChangeSearch("")}
+          onReset={() => {
+            onChangeSearch("");
+            dispatch(setSearch(""));
+          }}
           value={search}
+          onKeyDown={onKeyDown}
         />
         <Button
           className={styles.buttonShow}

@@ -1,22 +1,15 @@
 import React from "react";
-import { PageHeader } from "./PageHeader/PageHeader";
-import { FilterBar } from "./FilterBar/FilterBar";
-import { OrdersTable } from "./OrdersTable/OrdersTable";
-import { loadOrders } from "../../../dbase/data";
+import { PageHeader } from "./components/PageHeader/PageHeader";
+import { FilterBar } from "./components/FilterBar/FilterBar";
+import { OrdersTable } from "./components/OrdersTable/OrdersTable";
 import styles from "./Orders.module.css";
 
 export const Orders = () => {
-  const applyFilter = (filter) => {
-    console.log(filter);
-  };
-
-  const ordersList = loadOrders();
-
   return (
     <div className={styles._}>
       <PageHeader />
-      <FilterBar onApplyFilter={applyFilter} />
-      <OrdersTable data={ordersList} />
+      <FilterBar />
+      <OrdersTable />
     </div>
   );
 };

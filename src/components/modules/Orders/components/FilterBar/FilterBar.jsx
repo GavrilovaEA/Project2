@@ -2,19 +2,35 @@ import { Filters } from "./Filters/Filters";
 import { FilterForm } from "./FilterForm/FilterForm";
 import { useState } from "react";
 import styles from "./FilterBar.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import { setFilter } from "../../model/filtersSlice";
+import { setSort } from "../../model/sortSlice";
+import { selectFilter, selectSearch } from "../../model/ordersTableSelectors";
 
-export const FilterBar = ({ onApplyFilter }) => {
+export const FilterBar = () => {
   // Состояния
+
   const [isShowForm, setShowForm] = useState(false);
-  const [search, setSearch] = useState("");
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
-  const [startAmount, setStartAmount] = useState("");
-  const [endAmount, setEndAmount] = useState("");
-  const [selectedStatuses, setStatusSelected] = useState([]);
+
+  const [search, setSearch] = useState(useSelector(selectSearch));
+  const [startDate, setStartDate] = useState(
+    useSelector(selectFilter).startDate
+  );
+  const [endDate, setEndDate] = useState(useSelector(selectFilter).endDate);
+  const [startAmount, setStartAmount] = useState(
+    useSelector(selectFilter).startAmount
+  );
+  const [endAmount, setEndAmount] = useState(
+    useSelector(selectFilter).endAmount
+  );
+  const [selectedStatuses, setStatusSelected] = useState(
+    useSelector(selectFilter).selectedStatuses
+  );
 
   // Демонстрация работы индикатора
   let loading = isShowForm;
+
+  const dispatch = useDispatch();
 
   // Клик на элементе выпадающего списка
   const onSelectStatusList = (id) => {
@@ -64,7 +80,7 @@ export const FilterBar = ({ onApplyFilter }) => {
         endAmount: endAmount,
         selectedStatuses: selectedStatuses,
       };
-      onApplyFilter && onApplyFilter(result);
+      dispatch(setFilter(result));
     } else {
       console.log("Ошибка валидации");
     }
@@ -77,6 +93,18 @@ export const FilterBar = ({ onApplyFilter }) => {
     setStatusSelected([]);
     setStartAmount("");
     setEndAmount("");
+
+    dispatch(
+      setFilter({
+        startDate: "",
+        endDate: "",
+        startAmount: "",
+        endAmount: "",
+        selectedStatuses: [],
+      })
+    );
+
+    dispatch(setSort({ fieldName: "date", asc: false }));
   };
 
   return (

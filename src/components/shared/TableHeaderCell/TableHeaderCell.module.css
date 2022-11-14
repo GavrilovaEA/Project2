@@ -15,6 +15,7 @@
 }
 
 ._ {
+  cursor: default;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
   background-color: var(--table__head__cell-bg-color);
@@ -41,7 +42,6 @@
   position: relative;
   width: 1rem;
   height: 1rem;
-  cursor: pointer;
 }
 
 .icon {
@@ -51,4 +51,8 @@
   left: calc(50% - 0.375rem / 2);
   top: calc(50% - 0.3125rem / 2);
   fill: var(--table__head__cell__ico-color);
+}
+
+.asc .icon {
+  transform: rotate(180deg);
 }

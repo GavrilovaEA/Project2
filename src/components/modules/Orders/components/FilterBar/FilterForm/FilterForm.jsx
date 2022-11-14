@@ -1,10 +1,10 @@
-import { Input } from "../../../../shared/Input/Input";
-import { Button } from "../../../../shared/Button/Button";
-import { Dropdown } from "../../../../shared/Dropdown/Dropdown";
-import { Checkbox } from "../../../../shared/Checkbox/Checkbox";
-import { STATUS_LIST } from "../../../../../dbase/data";
+import { Input } from "../../../../../shared/Input/Input";
+import { Button } from "../../../../../shared/Button/Button";
+import { Dropdown } from "../../../../../shared/Dropdown/Dropdown";
+import { Checkbox } from "../../../../../shared/Checkbox/Checkbox";
+import { STATUS_LIST } from "../../../../../../dbase/data";
 import styles from "./FilterForm.module.css";
-import { Icon } from "../../../../shared/Icon/Icon";
+import { Icon } from "../../../../../shared/Icon/Icon";
 
 export const FilterForm = ({
   selectedStatuses,
@@ -81,7 +81,7 @@ export const FilterForm = ({
               readonly
               placeholder="Введите..."
               postfix={
-                <div style={{ width: "0.75rem" }}>
+                <div className={styles.iconStatusWrapper}>
                   <Icon className={styles.iconStatus} iconName="down" />
                 </div>
               }

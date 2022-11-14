@@ -1,5 +1,5 @@
 import { OrdersTableBodyRow } from "./OrdersTableBodyRow/OrdersTableBodyRow";
-import { TableBody } from "../../../../shared/TableBody/TableBody";
+import { TableBody } from "../../../../../shared/TableBody/TableBody";
 
 export const OrdersTableBody = ({ data }) => {
   return (

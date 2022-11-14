@@ -49,7 +49,7 @@
 }
 
 .new .icon {
-  background-image: url("./icons/statusNew.svg");
+  background-image: url("icons/statusNew.svg");
 }
 
 .new .text::after {
@@ -58,7 +58,7 @@
 }
 
 .calculation .icon {
-  background-image: url("./icons/statusCalculation.svg");
+  background-image: url("icons/statusCalculation.svg");
 }
 .calculation .text::after {
   content: "Рассчет";
@@ -70,19 +70,15 @@
 }
 
 .canceled .icon {
-  background-image: url("./icons/statusCanceled.svg");
+  background-image: url("icons/statusCanceled.svg");
 }
 .canceled .text::after {
   content: "Отменен";
   color: var(--label-status_status-canceled__text-color);
 }
 
-.complete {
-  opacity: 0.5;
-}
-
 .complete .icon {
-  background-image: url("./icons/statusComplete.svg");
+  background-image: url("icons/statusComplete.svg");
 }
 
 .complete .text::after {
@@ -91,7 +87,7 @@
 }
 
 .confirmed .icon {
-  background-image: url("./icons/statusConfirmed.svg");
+  background-image: url("icons/statusConfirmed.svg");
 }
 .confirmed .text::after {
   content: "Подтвержден";
@@ -99,7 +95,7 @@
 }
 
 .postponed .icon {
-  background-image: url("./icons/statusPostponed.svg");
+  background-image: url("icons/statusPostponed.svg");
 }
 .postponed .text::after {
   content: "Отложен";

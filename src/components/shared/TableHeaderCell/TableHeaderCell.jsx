@@ -14,10 +14,10 @@ export const TableHeaderCell = ({
   });
 
   return (
-    <div className={componentClass}>
+    <div className={componentClass} onClick={onSort}>
       <div className={styles.text}>{children}</div>
       {onSort && (
-        <div className={styles.iconWrapper} onClick={onSort}>
+        <div className={styles.iconWrapper}>
           <Icon className={styles.icon} iconName={icon} />
         </div>
       )}
