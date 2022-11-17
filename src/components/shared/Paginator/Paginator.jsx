@@ -6,11 +6,13 @@ import { useState } from "react";
 
 export const Paginator = ({ pageCur, pageCount, onGotoPage }) => {
   const [numPage, setNumPage] = useState("");
+  const [isShowNumPage, setShowNumPage] = useState(false);
 
   const onKeyDown = (event) => {
     if (event.code === "Enter" || event.code === "NumpadEnter") {
       if (+numPage >= 1 && +numPage <= pageCount) {
         onGotoPage(+numPage);
+        setShowNumPage(false);
       }
     }
   };
@@ -79,7 +81,10 @@ export const Paginator = ({ pageCur, pageCount, onGotoPage }) => {
           />
         }
         className={styles.dlgGotoPage}
-      ></Dropdown>
+        isShowExt={isShowNumPage}
+        onClick={() => setShowNumPage(!isShowNumPage)}
+        onClose={() => setShowNumPage(false)}
+      />
     </div>
   );
 };

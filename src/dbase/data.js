@@ -1989,7 +1989,7 @@ export function loadOrders() {
         amount += items[item].prodPrice;
       }
     }
-    orders[order].checked = false;
+    // orders[order].checked = false;
     orders[order].quantity = quantity;
     orders[order].amount = amount;
   }

@@ -1,4 +1,4 @@
-import { STATUS_LIST } from "../../../../dbase/data";
+import { loadItems, STATUS_LIST } from "../../../../dbase/data";
 import { createSelector } from "@reduxjs/toolkit";
 
 export const PAGE_SIZE = 20;
@@ -9,6 +9,16 @@ export const selectSearch = (state) => selectAll(state).search;
 export const selectCurrentPage = (state) => selectAll(state).currentPage;
 
 export const selectOrders = (state) => state.orders.ordersList;
+export const selectSelectedOrders = (state) => state.orders.selectedOrders;
+export const selectSelectedRecordCount = (state) =>
+  selectSelectedOrders(state).length;
+
+export const selectOrder = (state) => {
+  const order = state.orders.order;
+  const items =
+    order && loadItems().filter((record) => record.orderId === order.id);
+  return { order: order, items: items };
+};
 
 const strToDate = (date) => {
   return new Date(date.split(".").reverse().join("-"));

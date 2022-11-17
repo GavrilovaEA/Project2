@@ -1,0 +1,12 @@
+._:nth-child(1) {
+  width: 4rem;
+}
+
+._:nth-child(2) {
+  width: 0;
+  flex-grow: 1;
+}
+
+._:nth-child(3) {
+  width: 3rem;
+}

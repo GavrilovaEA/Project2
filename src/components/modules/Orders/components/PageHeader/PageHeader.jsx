@@ -7,6 +7,7 @@ const html = document.getElementsByTagName("html")[0];
 
 export const PageHeader = () => {
   const [theme, setTheme] = useState(html.getAttribute("theme") || "light");
+  const [isShowDlgTheme, setShowDlgTheme] = useState(false);
 
   // Установка темы
   useEffect(() => {
@@ -14,27 +15,35 @@ export const PageHeader = () => {
   }, [theme]);
 
   // Содержимое формы выбора темы
-  const dlgTheme = [
-    <div className={styles.dlgCaption}>Выберите тему</div>,
-    <Button
-      key="sun"
-      iconName="sun"
-      size="small"
-      theme={theme === "dark" ? "reverse" : ""}
-      onClick={() => setTheme("light")}
-    >
-      Светлая
-    </Button>,
-    <Button
-      key="moon"
-      iconName="moon"
-      size="small"
-      theme={theme === "light" ? "reverse" : ""}
-      onClick={() => setTheme("dark")}
-    >
-      Темная
-    </Button>,
-  ];
+  const dlgTheme = (
+    <>
+      <div className={styles.dlgCaption}>Выберите тему</div>
+      <Button
+        key="sun"
+        iconName="sun"
+        size="small"
+        theme={theme === "dark" ? "reverse" : ""}
+        onClick={() => {
+          setTheme("light");
+          setShowDlgTheme(false);
+        }}
+      >
+        Светлая
+      </Button>
+      <Button
+        key="moon"
+        iconName="moon"
+        size="small"
+        theme={theme === "light" ? "reverse" : ""}
+        onClick={() => {
+          setTheme("dark");
+          setShowDlgTheme(false);
+        }}
+      >
+        Темная
+      </Button>
+    </>
+  );
 
   return (
     <div className={styles._}>
@@ -50,7 +59,13 @@ export const PageHeader = () => {
           </Button>
         }
         overlay={dlgTheme}
+        isShowExt={isShowDlgTheme}
         className={styles.dlgTheme}
+        onClose={() => {
+          setShowDlgTheme(false);
+          console.log("sdfdsf");
+        }}
+        onClick={() => setShowDlgTheme(!isShowDlgTheme)}
       />
     </div>
   );

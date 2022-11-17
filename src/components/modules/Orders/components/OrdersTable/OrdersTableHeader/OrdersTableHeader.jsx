@@ -8,6 +8,7 @@ import stylesCell from "../../../../../shared/TableHeaderCell/TableHeaderCell.mo
 import { useDispatch, useSelector } from "react-redux";
 import { setSort } from "../../../model/sortSlice";
 import { selectSort } from "../../../model/ordersTableSelectors";
+import { deselectAllOrders } from "../../../model/ordersSlice";
 
 export const OrdersTableHeader = ({ allSelect, onChangeAllSelect }) => {
   const dispatch = useDispatch();
@@ -15,6 +16,7 @@ export const OrdersTableHeader = ({ allSelect, onChangeAllSelect }) => {
 
   const onSort = (field) => {
     dispatch(setSort({ fieldName: field }));
+    dispatch(deselectAllOrders());
   };
 
   return (
