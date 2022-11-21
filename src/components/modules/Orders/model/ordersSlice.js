@@ -4,7 +4,7 @@ import { loadOrders } from "../../../../dbase/data";
 const initialState = {
   ordersList: loadOrders(),
   selectedOrders: [],
-  order: null,
+  editedOrder: null,
 };
 
 export const ordersSlice = createSlice({
@@ -33,31 +33,27 @@ export const ordersSlice = createSlice({
       state.selectedOrders = [];
     },
     setStatusSelectedOrders: (state, action) => {
-      let newOrderList = [];
-      for (let item of state.ordersList) {
-        if (state.selectedOrders.includes(item.id))
-          newOrderList.push({ ...item, status: action.payload });
-        else newOrderList.push(item);
-      }
-      state.ordersList = newOrderList;
+      state.ordersList.map((item) =>
+        state.selectedOrders.includes(item.id)
+          ? (item.status = action.payload)
+          : item
+      );
       state.selectedOrders = [];
     },
     getOrder: (state, action) => {
-      state.order = state.ordersList.filter(
+      state.editedOrder = state.ordersList.filter(
         (record) => record.id === action.payload
       )[0];
     },
     setOrder: (state, action) => {
       if (action.payload) {
-        for (let i = 0; i <= state.ordersList.length; i++) {
-          if (state.ordersList[i].id === action.payload.id) {
-            state.ordersList[i].fio = action.payload.fio;
-            state.ordersList[i].status = action.payload.status;
-            break;
-          }
-        }
+        let order = state.ordersList.find(
+          (item) => item.id === action.payload.id
+        );
+        order.fio = action.payload.fio;
+        order.status = action.payload.status;
       }
-      state.order = null;
+      state.editedOrder = null;
     },
   },
 });

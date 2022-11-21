@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { Table } from "../../../../shared/Table/Table";
 import { OrdersTableHeader } from "./OrdersTableHeader/OrdersTableHeader";
 import { OrdersTableBody } from "./OrdersTableBody/OrdersTableBody";
 import { OrdersTableFooter } from "./OrdersTableFooter/OrdersTableFooter";
 import { useDispatch, useSelector } from "react-redux";
-import { setPage } from "../../model/filtersSlice";
 import { selectAllOrders, deselectAllOrders } from "../../model/ordersSlice";
 import {
   selectFilteredOrders,
@@ -15,19 +14,17 @@ import {
 } from "../../model/ordersTableSelectors";
 
 export const OrdersTable = () => {
-  const [allSelect, setAllSelect] = useState(false);
   const { ordersList, recordCount } = useSelector(selectFilteredOrders);
   const selectedOrders = useSelector(selectSelectedOrders);
   const sort = useSelector(selectSort);
   const currentPage = useSelector(selectCurrentPage);
 
+  const allSelect = ordersList.length === selectedOrders.length;
+
   const dispatch = useDispatch();
-  let ordersLst = [];
-  for (let item of ordersList) {
-    let checked = false;
-    if (selectedOrders.includes(item.id)) checked = true;
-    ordersLst.push({ ...item, checked: checked });
-  }
+  const ordersListWithChecked = ordersList.map((item) => {
+    return { ...item, checked: selectedOrders.includes(item.id) };
+  });
 
   let paginator = {
     count: Math.ceil(recordCount / PAGE_SIZE),
@@ -36,13 +33,12 @@ export const OrdersTable = () => {
 
   const changeSelectAllOrders = () => {
     if (!allSelect) {
-      let orders = [];
-      for (let item of ordersList) {
-        orders.push(item.id);
-      }
+      const orders = ordersList.reduce((previos, current) => {
+        previos.push(current.id);
+        return previos;
+      }, []);
       dispatch(selectAllOrders(orders));
     } else dispatch(deselectAllOrders());
-    setAllSelect(!allSelect);
   };
 
   return (
@@ -52,7 +48,7 @@ export const OrdersTable = () => {
         allSelect={allSelect}
         onChangeAllSelect={() => changeSelectAllOrders()}
       />
-      <OrdersTableBody data={ordersLst} />
+      <OrdersTableBody data={ordersListWithChecked} />
       <OrdersTableFooter recSelect={0} paginator={paginator} />
     </Table>
   );

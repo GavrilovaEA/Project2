@@ -22,14 +22,7 @@ export const filtersSlice = createSlice({
     },
 
     setFilter: (state, action) => {
-      state.filter = {
-        ...state.filter,
-        startDate: action.payload.startDate,
-        endDate: action.payload.endDate,
-        selectedStatuses: action.payload.selectedStatuses,
-        startAmount: action.payload.startAmount,
-        endAmount: action.payload.endAmount,
-      };
+      state.filter = action.payload;
       state.currentPage = 1;
     },
 

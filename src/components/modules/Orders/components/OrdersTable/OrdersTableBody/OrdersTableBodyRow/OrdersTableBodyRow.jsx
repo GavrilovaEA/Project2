@@ -39,22 +39,22 @@ export const OrdersTableBodyRow = ({ data, selected }) => {
           </label>
         }
       </TableCell>
-      <TableCell className={cellClass} onDoubleClick={() => onEditOrder(id)}>
+      <TableCell className={cellClass} onClick={() => onEditOrder(id)}>
         {id}
       </TableCell>
-      <TableCell className={cellClass} onDoubleClick={() => onEditOrder(id)}>
+      <TableCell className={cellClass} onClick={() => onEditOrder(id)}>
         {formatDate(date)}
       </TableCell>
-      <TableCell className={cellClass} onDoubleClick={() => onEditOrder(id)}>
+      <TableCell className={cellClass} onClick={() => onEditOrder(id)}>
         {<LabelStatus status={status} />}
       </TableCell>
-      <TableCell className={cellClass} onDoubleClick={() => onEditOrder(id)}>
+      <TableCell className={cellClass} onClick={() => onEditOrder(id)}>
         {quantity}
       </TableCell>
-      <TableCell className={cellClass} onDoubleClick={() => onEditOrder(id)}>
+      <TableCell className={cellClass} onClick={() => onEditOrder(id)}>
         {amount + " ₽"}
       </TableCell>
-      <TableCell className={cellClass} onDoubleClick={() => onEditOrder(id)}>
+      <TableCell className={cellClass} onClick={() => onEditOrder(id)}>
         {fio}
       </TableCell>
     </TableRow>

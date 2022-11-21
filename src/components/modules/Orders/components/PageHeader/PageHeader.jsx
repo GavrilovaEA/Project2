@@ -63,7 +63,6 @@ export const PageHeader = () => {
         className={styles.dlgTheme}
         onClose={() => {
           setShowDlgTheme(false);
-          console.log("sdfdsf");
         }}
         onClick={() => setShowDlgTheme(!isShowDlgTheme)}
       />

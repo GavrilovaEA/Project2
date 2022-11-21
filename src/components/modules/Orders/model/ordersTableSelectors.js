@@ -2,11 +2,11 @@ import { loadItems, STATUS_LIST } from "../../../../dbase/data";
 import { createSelector } from "@reduxjs/toolkit";
 
 export const PAGE_SIZE = 20;
-export const selectAll = (state) => state.filters;
+export const selectFilters = (state) => state.filters;
 export const selectSort = (state) => state.sort.sort;
-export const selectFilter = (state) => selectAll(state).filter;
-export const selectSearch = (state) => selectAll(state).search;
-export const selectCurrentPage = (state) => selectAll(state).currentPage;
+export const selectFilter = (state) => selectFilters(state).filter;
+export const selectSearch = (state) => selectFilters(state).search;
+export const selectCurrentPage = (state) => selectFilters(state).currentPage;
 
 export const selectOrders = (state) => state.orders.ordersList;
 export const selectSelectedOrders = (state) => state.orders.selectedOrders;
@@ -14,10 +14,11 @@ export const selectSelectedRecordCount = (state) =>
   selectSelectedOrders(state).length;
 
 export const selectOrder = (state) => {
-  const order = state.orders.order;
+  const editedOrder = state.orders.editedOrder;
   const items =
-    order && loadItems().filter((record) => record.orderId === order.id);
-  return { order: order, items: items };
+    editedOrder &&
+    loadItems().filter((record) => record.orderId === editedOrder.id);
+  return { order: editedOrder, items: items };
 };
 
 const strToDate = (date) => {
@@ -25,26 +26,33 @@ const strToDate = (date) => {
 };
 
 const dateInRange = (date, startDate, endDate) => {
-  let result = true;
-  if (startDate) result = result && date >= strToDate(startDate);
-  if (endDate) result = result && date <= strToDate(endDate);
-  return result;
+  if (
+    (startDate && date < strToDate(startDate)) ||
+    (endDate && date > strToDate(endDate))
+  ) {
+    return false;
+  }
+  return true;
 };
 
 const statusInSelected = (status, selectedStatuses) => {
   if (
     selectedStatuses.length > 0 &&
     selectedStatuses.length < Object.keys(STATUS_LIST).length
-  )
+  ) {
     return selectedStatuses.includes(status);
-  else return true;
+  }
+  return true;
 };
 
 const amountInRange = (amount, startAmount, endAmount) => {
-  let result = true;
-  if (startAmount) result = result && amount >= +startAmount;
-  if (endAmount) result = result && amount <= endAmount;
-  return result;
+  if (
+    (startAmount && amount < +startAmount) ||
+    (endAmount && amount > +endAmount)
+  ) {
+    return false;
+  }
+  return true;
 };
 
 const recordInSearch = (id, fio, search) => {
@@ -81,21 +89,17 @@ const handlerSortNumber = (itemPrev, itemNext) => {
   return itemPrev > itemNext ? 1 : -1;
 };
 
+const handlerSort = {
+  date: handlerSortDate,
+  status: handlerSortStatus,
+  amount: handlerSortNumber,
+  quantity: handlerSortNumber,
+};
+
 const ordersSort = (orders, sort) => {
-  let handlerSort;
-  switch (sort.field) {
-    case "date":
-      handlerSort = handlerSortDate;
-      break;
-    case "status":
-      handlerSort = handlerSortStatus;
-      break;
-    default:
-      handlerSort = handlerSortNumber;
-  }
   return [...orders].sort(
     (recordPrev, recordNext) =>
-      handlerSort(recordPrev[sort.field], recordNext[sort.field]) *
+      handlerSort[sort.field](recordPrev[sort.field], recordNext[sort.field]) *
       (sort.asc ? 1 : -1)
   );
 };
@@ -110,11 +114,11 @@ export const selectFilteredOrders = createSelector(
   selectSort,
   selectCurrentPage,
   (ordersList, filter, search, sort, currentPage) => {
-    let displayList = ordersFilter(ordersList, filter, search);
-    displayList = ordersSort(displayList, sort);
-    const recordCount = displayList.length;
-    displayList = getOrdersPage(displayList, currentPage);
+    const displayOrdersFiltered = ordersFilter(ordersList, filter, search);
+    const displayOrdersSorted = ordersSort(displayOrdersFiltered, sort);
+    const recordCount = displayOrdersSorted.length;
+    const displayOrdersPage = getOrdersPage(displayOrdersSorted, currentPage);
 
-    return { ordersList: displayList, recordCount: recordCount };
+    return { ordersList: displayOrdersPage, recordCount: recordCount };
   }
 );

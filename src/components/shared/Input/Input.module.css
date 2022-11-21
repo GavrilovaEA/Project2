@@ -82,6 +82,8 @@
 }
 
 .prefix {
+  font-size: 0.8125rem;
+  line-height: 1rem;
   display: flex;
   align-items: center;
   height: 1rem;
@@ -101,6 +103,8 @@
 }
 
 .postfix {
+  font-size: 0.8125rem;
+  line-height: 1rem;
   height: 1rem;
   display: flex;
   align-items: center;

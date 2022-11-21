@@ -153,7 +153,7 @@
   --button__ico-opacity: 1;
 }
 
-.dlgClose {
+.dialogClose {
   right: 0;
   padding: 1rem;
   border-radius: 0.5rem;
@@ -163,8 +163,13 @@
   width: 10rem;
 }
 
+.dialogCloseCaption {
+  color: var(--dropdown_caption-text-color);
+  font-size: 0.8125rem;
+}
+
 .status {
-  width: 12rem;
+  width: 27.375rem;
   flex-shrink: 0;
 }
 
@@ -184,7 +189,7 @@
   stroke: var(--input__icoStatus-color);
 }
 
-.dlgSelectStatus {
+.dialogSelectStatus {
   padding: 0.5rem 0;
   gap: 0;
 }

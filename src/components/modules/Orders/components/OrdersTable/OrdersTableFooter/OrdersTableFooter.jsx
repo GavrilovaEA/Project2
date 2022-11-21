@@ -86,39 +86,43 @@ export const OrdersTableFooter = ({ paginator }) => {
   return (
     <TableFooter className={styles._}>
       <div className={styles.action}>
-        <div className={styles.recordCount}>
-          Выбрано записей: {selectedRecordCount}
-        </div>
-        <Dropdown
-          trigger={
-            <Button size="small" iconName="edit">
-              Изменить статус
-            </Button>
-          }
-          overlay={dlgSetStatus}
-          isShowExt={isShowDlgStatus}
-          onClick={onClickSetStatus}
-          onClose={() => setShowDlgStatus(false)}
-          className={styles.dlgSetStatus}
-        />
+        {selectedRecordCount !== 0 ? (
+          <>
+            <div className={styles.recordCount}>
+              Выбрано записей: {selectedRecordCount}
+            </div>
+            <Dropdown
+              trigger={
+                <Button size="small" iconName="edit">
+                  Изменить статус
+                </Button>
+              }
+              overlay={dlgSetStatus}
+              isShowExt={isShowDlgStatus}
+              onClick={onClickSetStatus}
+              onClose={() => setShowDlgStatus(false)}
+              className={styles.dlgSetStatus}
+            />
 
-        <Dropdown
-          trigger={
-            <Button
-              className={styles.recordDelete}
-              size="small"
-              iconName="recycle"
-              iconClass={styles.button__ico}
-            >
-              Удалить
-            </Button>
-          }
-          overlay={dlgDelRec}
-          className={styles.dlgDelRec}
-          isShowExt={isShowDlgDelRec}
-          onClick={onClickDelRec}
-          onClose={() => setShowDlgDelRec(false)}
-        />
+            <Dropdown
+              trigger={
+                <Button
+                  className={styles.recordDelete}
+                  size="small"
+                  iconName="recycle"
+                  iconClass={styles.button__ico}
+                >
+                  Удалить
+                </Button>
+              }
+              overlay={dlgDelRec}
+              className={styles.dlgDelRec}
+              isShowExt={isShowDlgDelRec}
+              onClick={onClickDelRec}
+              onClose={() => setShowDlgDelRec(false)}
+            />
+          </>
+        ) : null}
       </div>
       <Paginator
         pageCount={paginator.count}

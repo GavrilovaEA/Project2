@@ -11,6 +11,8 @@ import { Radio } from "../../../../shared/Radio/Radio";
 import { Dropdown } from "../../../../shared/Dropdown/Dropdown";
 import { Icon } from "../../../../shared/Icon/Icon";
 
+const VALID_CODE = "123";
+
 export const EditOrder = ({ order, items }) => {
   const dispatch = useDispatch();
 
@@ -19,16 +21,16 @@ export const EditOrder = ({ order, items }) => {
   const [fio, setFIO] = useState(order && order.fio);
   const [code, setCode] = useState("");
   const [status, setStatus] = useState(order && order.status);
-  const [error, setError] = useState("");
-  const [isShowDlgStatus, setShowDlgStatus] = useState(false);
-  const [isShowDlgClose, setShowDlgClose] = useState(false);
+  const [error, setError] = useState({ field: "", text: "" });
+  const [isShowDialogStatus, setShowDialogStatus] = useState(false);
+  const [isShowDialogClose, setShowDialogClose] = useState(false);
 
   const onCancel = () => {
     dispatch(setOrder(null));
   };
 
   const isValidFIO = (value) => {
-    return value;
+    return value.length > 0;
   };
 
   const onChangeFIO = (e) => {
@@ -36,23 +38,28 @@ export const EditOrder = ({ order, items }) => {
   };
 
   const isValidCode = (value) => {
-    return value === "123";
+    return value === VALID_CODE;
   };
 
-  const btSaveClick = () => {
+  const buttonSaveClick = () => {
     if (!isValidFIO(fio)) {
-      setError("Поле ФИО не может быть пустым");
+      setError({ field: "fio", text: "Поле ФИО не может быть пустым" });
       return;
     }
     if (!isValidCode(code)) {
-      setError("Неверный код подтверждения");
+      setError({ field: "code", text: "Неверный код подтверждения" });
       return;
     }
 
     dispatch(setOrder({ id: order.id, fio: fio, status: status }));
   };
 
-  const dlgSelectStatus = (
+  const onSetStatus = (item) => {
+    setStatus(item);
+    setShowDialogStatus(false);
+  };
+
+  const dialogSelectStatus = (
     <>
       {Object.keys(STATUS_LIST).map((item) => (
         <Radio
@@ -64,26 +71,25 @@ export const EditOrder = ({ order, items }) => {
           name="status"
           id={item}
           checked={false}
-          onChange={() => {
-            setStatus(item);
-            setShowDlgStatus(false);
-          }}
+          onChange={() => onSetStatus(item)}
         />
       ))}
     </>
   );
 
   const onClickSelectStatus = () => {
-    setShowDlgStatus(!isShowDlgStatus);
+    setShowDialogStatus(!isShowDialogStatus);
   };
 
   const onResume = () => {
-    setShowDlgClose(false);
+    setShowDialogClose(false);
   };
 
-  const dlgClose = (
+  const dialogClose = (
     <>
-      <div className={styles.dlgCloseCaption}>Есть несохраненные изменения</div>
+      <div className={styles.dialogCloseCaption}>
+        Есть несохраненные изменения
+      </div>
       <Button size="small" theme="reverse" onClick={onCancel}>
         Сбросить
       </Button>
@@ -94,7 +100,7 @@ export const EditOrder = ({ order, items }) => {
   );
 
   const onClose = () => {
-    if (order.fio !== fio || order.status !== status) setShowDlgClose(true);
+    if (order.fio !== fio || order.status !== status) setShowDialogClose(true);
     else onCancel();
   };
 
@@ -108,11 +114,11 @@ export const EditOrder = ({ order, items }) => {
             trigger={
               <Button className={styles.headerButton} iconName={"xLarge"} />
             }
-            overlay={dlgClose}
-            className={styles.dlgClose}
-            isShowExt={isShowDlgClose}
+            overlay={dialogClose}
+            className={styles.dialogClose}
+            isShowExt={isShowDialogClose}
             onClick={onClose}
-            onClose={() => setShowDlgClose(false)}
+            onClose={() => setShowDialogClose(false)}
           />
         </div>
         <div className={styles.content}>
@@ -122,7 +128,7 @@ export const EditOrder = ({ order, items }) => {
             <Input
               label={"ФИО покупателя"}
               value={fio}
-              incorrect={!isValidFIO(fio)}
+              incorrect={error.field === "fio"}
               onChange={onChangeFIO}
             />
 
@@ -132,7 +138,7 @@ export const EditOrder = ({ order, items }) => {
 
             <Dropdown
               trigger={
-                <div>
+                <div className={styles.status}>
                   <Input
                     className={styles.status}
                     label="Статус заказа"
@@ -146,16 +152,16 @@ export const EditOrder = ({ order, items }) => {
                   />
                 </div>
               }
-              overlay={dlgSelectStatus}
-              isShowExt={isShowDlgStatus}
+              overlay={dialogSelectStatus}
+              isShowExt={isShowDialogStatus}
               onClick={onClickSelectStatus}
-              onClose={() => setShowDlgStatus(false)}
-              className={styles.dlgSelectStatus}
+              onClose={() => setShowDialogStatus(false)}
+              className={styles.dialogSelectStatus}
             />
 
             <Input
-              // key="code"
               label={"Код подтверждения"}
+              incorrect={error.field === "code"}
               onChange={(e) => setCode(e.target.value)}
             />
           </div>
@@ -163,11 +169,11 @@ export const EditOrder = ({ order, items }) => {
         <div className={styles.footer}>
           <div className={styles.footerSave}>
             <div ref={lbMessage} className={styles.footerSaveText}>
-              {error}
+              {error.text}
             </div>
             <Button
               className={styles.button}
-              onClick={btSaveClick}
+              onClick={buttonSaveClick}
               iconName={"apply"}
             >
               Сохранить
