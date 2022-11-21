@@ -5,6 +5,7 @@ import { LoadIndicator } from "../../../../../shared/LoadIndicator/LoadIndicator
 import { Icon } from "../../../../../shared/Icon/Icon";
 import { setSearch } from "../../../model/filtersSlice";
 import { useDispatch } from "react-redux";
+import { deselectAllOrders } from "../../../model/ordersSlice";
 
 export const Filters = ({
   search,
@@ -19,6 +20,7 @@ export const Filters = ({
   const onKeyDown = (event) => {
     if (event.code === "NumpadEnter" || event.code === "Enter") {
       dispatch(setSearch(search));
+      dispatch(deselectAllOrders());
     }
   };
 

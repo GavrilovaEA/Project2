@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   sort: {
     field: "date",
-    asc: true,
+    asc: false,
   },
 };
 

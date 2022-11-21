@@ -2,14 +2,14 @@
 ._ {
   --page-header-bg-color: transparent;
   --page-header__title-text-color: #000000;
-  --dlgTheme_caption-text-color: #000000;
+  --dialogTheme_caption-text-color: #000000;
 }
 
 /* Темная тема */
 :root[theme="dark"] ._ {
   --page-header-bg-color: transparent;
   --page-header__title-text-color: #bcc4cc;
-  --dlgTheme_caption-text-color: #bcc4cc;
+  --dialogTheme_caption-text-color: #bcc4cc;
 }
 
 ._ {
@@ -32,7 +32,7 @@
   --button_reverse__ico-opacity: 1;
 }
 
-.dlgTheme {
+.dialogTheme {
   right: 0;
   width: 128px;
   padding: 1rem;
@@ -41,8 +41,8 @@
   gap: 0.5rem;
 }
 
-.dlgCaption {
-  color: var(--dlgTheme_caption-text-color);
+.dialogCaption {
+  color: var(--dialogTheme_caption-text-color);
   font-family: "Ubuntu";
   font-style: normal;
   font-weight: 400;

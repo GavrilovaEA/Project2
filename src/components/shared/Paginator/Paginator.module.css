@@ -39,7 +39,7 @@
   background-color: var(--paginator-bg-color);
 }
 
-.dlgGotoPage {
+.dialogGotoPage {
   bottom: 2rem;
   right: -1rem;
   width: 8rem;

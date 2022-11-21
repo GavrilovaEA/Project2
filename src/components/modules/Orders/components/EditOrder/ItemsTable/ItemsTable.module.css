@@ -1,0 +1,29 @@
+._ {
+  --form-edit__content__wrapper__table__header_bg-color: #459df5;
+  --form-edit__content__wrapper__table__header__cell_color: #ebf0f5;
+  --form-edit__content__wrapper__table__row_bg-color: #ffffff;
+  --form-edit__content__wrapper__table__row_border-color: #ebf0f5;
+  --form-edit__content__wrapper__table__row__cell_color: #000000;
+  --form-edit__content__wrapper__table__footer_bg-color: #ebf0f5;
+  --form-edit__content__wrapper__table__footer_color: #000000;
+}
+
+:root[theme="dark"] ._ {
+  --form-edit__content__wrapper__table__header_bg-color: #459df5;
+  --form-edit__content__wrapper__table__header__cell_color: #2b2d33;
+  --form-edit__content__wrapper__table__row_bg-color: #2b2d33;
+  --form-edit__content__wrapper__table__row_border-color: #171b1f;
+  --form-edit__content__wrapper__table__row__cell_color: #bcc4cc;
+  --form-edit__content__wrapper__table__footer_bg-color: #171b1f;
+  --form-edit__content__wrapper__table__footer_color: #459df5;
+}
+
+._ {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0;
+  flex: none;
+  align-self: stretch;
+  flex-grow: 0;
+}

@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setFilter } from "../../model/filtersSlice";
 import { setSort } from "../../model/sortSlice";
 import { selectFilter, selectSearch } from "../../model/ordersTableSelectors";
+import { deselectAllOrders } from "../../model/ordersSlice";
 
 export const FilterBar = () => {
   // Состояния
@@ -81,6 +82,7 @@ export const FilterBar = () => {
         selectedStatuses: selectedStatuses,
       };
       dispatch(setFilter(result));
+      dispatch(deselectAllOrders());
     } else {
       console.log("Ошибка валидации");
     }
@@ -103,8 +105,8 @@ export const FilterBar = () => {
         selectedStatuses: [],
       })
     );
-
     dispatch(setSort({ fieldName: "date", asc: false }));
+    dispatch(deselectAllOrders());
   };
 
   return (
