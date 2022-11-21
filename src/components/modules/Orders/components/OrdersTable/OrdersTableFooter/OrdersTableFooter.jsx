@@ -16,8 +16,8 @@ import { Radio } from "../../../../../shared/Radio/Radio";
 import styles from "./OrdersTableFooter.module.css";
 
 export const OrdersTableFooter = ({ paginator }) => {
-  const [isShowDlgDelRec, setShowDlgDelRec] = useState(false);
-  const [isShowDlgStatus, setShowDlgStatus] = useState(false);
+  const [isShowDialogDeleteRecord, setShowDialogDeleteRecord] = useState(false);
+  const [isShowDialogStatus, setShowDialogStatus] = useState(false);
   const dispatch = useDispatch();
   const selectedRecordCount = useSelector(selectSelectedRecordCount);
   const onGotoPage = (numberPage) => {
@@ -25,30 +25,30 @@ export const OrdersTableFooter = ({ paginator }) => {
     dispatch(deselectAllOrders());
   };
 
-  const onClickDelRec = () => {
+  const onClickDeleteRecord = () => {
     if (selectedRecordCount > 0) {
-      setShowDlgDelRec(!isShowDlgDelRec);
+      setShowDialogDeleteRecord(!isShowDialogDeleteRecord);
     }
   };
 
-  const onDelRec = () => {
+  const onDeleteRecord = () => {
     dispatch(deleteSelectedOrders());
-    setShowDlgDelRec(false);
+    setShowDialogDeleteRecord(false);
   };
 
-  const onCancelDelRec = () => {
-    setShowDlgDelRec(false);
+  const onCancelDeleteRecord = () => {
+    setShowDialogDeleteRecord(false);
   };
 
-  const dlgDelRec = (
+  const dialogDeleteRecord = (
     <>
       <div className={styles.recordDeleteCaption}>
         Удалить {selectedRecordCount} записей?
       </div>
-      <Button size="small" theme="reverse" onClick={onDelRec}>
+      <Button size="small" theme="reverse" onClick={onDeleteRecord}>
         Удалить
       </Button>
-      <Button size="small" onClick={onCancelDelRec}>
+      <Button size="small" onClick={onCancelDeleteRecord}>
         Отмена
       </Button>
     </>
@@ -56,16 +56,16 @@ export const OrdersTableFooter = ({ paginator }) => {
 
   const onClickSetStatus = () => {
     if (selectedRecordCount > 0) {
-      setShowDlgStatus(!isShowDlgStatus);
+      setShowDialogStatus(!isShowDialogStatus);
     }
   };
 
   const onSetStatus = (idStatus) => {
     dispatch(setStatusSelectedOrders(idStatus));
-    setShowDlgStatus(false);
+    setShowDialogStatus(false);
   };
 
-  const dlgSetStatus = (
+  const dialogSetStatus = (
     <>
       {Object.keys(STATUS_LIST).map((item) => (
         <Radio
@@ -97,11 +97,11 @@ export const OrdersTableFooter = ({ paginator }) => {
                   Изменить статус
                 </Button>
               }
-              overlay={dlgSetStatus}
-              isShowExt={isShowDlgStatus}
+              overlay={dialogSetStatus}
+              isShowExt={isShowDialogStatus}
               onClick={onClickSetStatus}
-              onClose={() => setShowDlgStatus(false)}
-              className={styles.dlgSetStatus}
+              onClose={() => setShowDialogStatus(false)}
+              className={styles.dialogSetStatus}
             />
 
             <Dropdown
@@ -115,11 +115,11 @@ export const OrdersTableFooter = ({ paginator }) => {
                   Удалить
                 </Button>
               }
-              overlay={dlgDelRec}
-              className={styles.dlgDelRec}
-              isShowExt={isShowDlgDelRec}
-              onClick={onClickDelRec}
-              onClose={() => setShowDlgDelRec(false)}
+              overlay={dialogDeleteRecord}
+              className={styles.dialogDeleteRecord}
+              isShowExt={isShowDialogDeleteRecord}
+              onClick={onClickDeleteRecord}
+              onClose={() => setShowDialogDeleteRecord(false)}
             />
           </>
         ) : null}

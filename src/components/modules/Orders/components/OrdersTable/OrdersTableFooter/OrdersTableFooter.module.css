@@ -48,7 +48,7 @@
   font-size: 0.8125rem;
 }
 
-.dlgDelRec {
+.dialogDeleteRecord {
   left: 0;
   bottom: 2rem;
   padding: 1rem;
@@ -59,7 +59,7 @@
   width: 8rem;
 }
 
-.dlgSetStatus {
+.dialogSetStatus {
   padding: 0.5rem 0;
   gap: 0;
   bottom: 2rem;

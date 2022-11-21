@@ -80,7 +80,7 @@ export const Paginator = ({ pageCur, pageCount, onGotoPage }) => {
             incorrect={incorrect}
           />
         }
-        className={styles.dlgGotoPage}
+        className={styles.dialogGotoPage}
         isShowExt={isShowNumPage}
         onClick={() => setShowNumPage(!isShowNumPage)}
         onClose={() => setShowNumPage(false)}

@@ -35,7 +35,7 @@ export const FilterForm = ({
   }
 
   // Содержимое раскрывающегося списка
-  const dlgStatus = Object.keys(STATUS_LIST).map((item) => (
+  const dialogStatus = Object.keys(STATUS_LIST).map((item) => (
     <Checkbox
       key={item}
       className={styles.dropdown_checkbox}
@@ -88,7 +88,7 @@ export const FilterForm = ({
             />
           </div>
         }
-        overlay={dlgStatus}
+        overlay={dialogStatus}
         className={styles.dropdown_list}
       />
       <div key="edAmount" className={styles.amount}>

@@ -7,7 +7,7 @@ const html = document.getElementsByTagName("html")[0];
 
 export const PageHeader = () => {
   const [theme, setTheme] = useState(html.getAttribute("theme") || "light");
-  const [isShowDlgTheme, setShowDlgTheme] = useState(false);
+  const [isShowDialogTheme, setShowDialogTheme] = useState(false);
 
   // Установка темы
   useEffect(() => {
@@ -15,9 +15,9 @@ export const PageHeader = () => {
   }, [theme]);
 
   // Содержимое формы выбора темы
-  const dlgTheme = (
+  const dialogTheme = (
     <>
-      <div className={styles.dlgCaption}>Выберите тему</div>
+      <div className={styles.dialogCaption}>Выберите тему</div>
       <Button
         key="sun"
         iconName="sun"
@@ -25,7 +25,7 @@ export const PageHeader = () => {
         theme={theme === "dark" ? "reverse" : ""}
         onClick={() => {
           setTheme("light");
-          setShowDlgTheme(false);
+          setShowDialogTheme(false);
         }}
       >
         Светлая
@@ -37,7 +37,7 @@ export const PageHeader = () => {
         theme={theme === "light" ? "reverse" : ""}
         onClick={() => {
           setTheme("dark");
-          setShowDlgTheme(false);
+          setShowDialogTheme(false);
         }}
       >
         Темная
@@ -58,13 +58,13 @@ export const PageHeader = () => {
             {theme === "light" ? "Светлая" : "Темная"}
           </Button>
         }
-        overlay={dlgTheme}
-        isShowExt={isShowDlgTheme}
-        className={styles.dlgTheme}
+        overlay={dialogTheme}
+        isShowExt={isShowDialogTheme}
+        className={styles.dialogTheme}
         onClose={() => {
-          setShowDlgTheme(false);
+          setShowDialogTheme(false);
         }}
-        onClick={() => setShowDlgTheme(!isShowDlgTheme)}
+        onClick={() => setShowDialogTheme(!isShowDialogTheme)}
       />
     </div>
   );
